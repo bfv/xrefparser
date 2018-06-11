@@ -12,11 +12,11 @@ console.log('end parsing:  ', new Date().toLocaleTimeString());
 const searcher = new Searcher(xrefdata);
 
 const t1 = Date.now();
-const tables = searcher
-                .getTabelReferences('Klantbes', true, true , undefined)
+const sources = searcher
+                .getTabelReferences('Klantbes', true, undefined, true)
                 .map(table => table.sourcefile);
 
-console.log(tables);
+console.log(sources);
 
 const t2 = Date.now();
 
