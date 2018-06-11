@@ -11,15 +11,15 @@ export class Parser {
 
     parseDir(dirname: string, sourcebasedir?: string): XrefFile[] {
 
-        let parsed: XrefFile[] = [];
+        const parsed: XrefFile[] = [];
 
         if (fs.existsSync(dirname)) {
 
             this.readFiles(dirname, []).forEach(file => {
-                let xreffile = this.parseFile(file, sourcebasedir);
+                const xreffile = this.parseFile(file, sourcebasedir);
 
-                let targetFile = xreffile.xreffile.replace('/xref/', '/xrefjson/') + '.json';
-                let targetDir = path.dirname(targetFile);
+                const targetFile = xreffile.xreffile.replace('/xref/', '/xrefjson/') + '.json';
+                const targetDir = path.dirname(targetFile);
                 this.mkdir(targetDir);
 
                 fs.writeFileSync(targetFile, JSON.stringify(xreffile, undefined, 2));
@@ -33,11 +33,11 @@ export class Parser {
 
     parseFile(file: string, sourcebasedir?: string) {
 
-        let xreffile = new XrefFile(file);
+        const xreffile = new XrefFile(file);
 
-        let lines = fs.readFileSync(file).toString().split('\n')
+        const lines = fs.readFileSync(file).toString().split('\n');
         lines.forEach(line => {
-            let xrefline = new XrefLine();
+            const xrefline = new XrefLine();
             xrefline.parse(line);
             this.processXrefLine(xrefline, xreffile);
         });
@@ -97,20 +97,20 @@ export class Parser {
 
         if (xrefline.type === 'ACCESS' || xrefline.type === 'UPDATE') {
 
-            let tablepart = xrefline.info.split(' ');
+            const tablepart = xrefline.info.split(' ');
             if (this.crudIgnore.indexOf(tablepart[0]) < 0) {
-                let tableinfo = tablepart[0].split('.');
+                const tableinfo = tablepart[0].split('.');
                 if (tableinfo[1] !== undefined) {
-                    let table = xreffile.addTable(tableinfo[1], tableinfo[0], false, false, xrefline.type === 'UPDATE');
+                    const table = xreffile.addTable(tableinfo[1], tableinfo[0], false, false, xrefline.type === 'UPDATE');
                     xreffile.addField(tablepart[1], table, xrefline.type === 'UPDATE');
                 }
             }
         }
         else if (xrefline.type === 'CREATE' || xrefline.type === 'DELETE') {
 
-            let tablepart = xrefline.info.split(' ');
+            const tablepart = xrefline.info.split(' ');
             if (tablepart[1] !== 'TEMPTABLE') {
-                let tableinfo = tablepart[0].split('.');
+                const tableinfo = tablepart[0].split('.');
                 xreffile.addTable(tableinfo[1], tableinfo[0], xrefline.type === 'CREATE', xrefline.type === 'DELETE');
             }
         }
@@ -140,7 +140,7 @@ export class Parser {
 
         const files = fs.readdirSync(dirname);
         files.forEach(file => {
-            let filename = dirname + '/' + file;
+            const filename = dirname + '/' + file;
             if (fs.statSync(filename).isDirectory()) {
                 this.readFiles(filename, filelist);
             }
@@ -165,7 +165,7 @@ export class Parser {
     }
 
     private normalizeSourceFilename(test: string) {
-        let result = test.replace(/\\/g, '/');
+        const result = test.replace(/\\/g, '/');
 
         return result;
     }

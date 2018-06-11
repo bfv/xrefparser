@@ -3,8 +3,8 @@ import { Table, Field, Class } from './model';
 
 export class XrefFile {
 
-    xreffile: string = '';
-    sourcefile: string = '';
+    xreffile = '';
+    sourcefile = '';
     class?: Class;
     includes: string[] = [];
     tablenames: string[] = [];

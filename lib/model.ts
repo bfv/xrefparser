@@ -12,11 +12,11 @@ export class XrefLine {
 
         this.compiledFile = entries[0];
         this.containingFile = entries[1];
-        this.lineNumber = parseInt(entries[2]);
+        this.lineNumber = parseInt(entries[2], 10);
         this.type = entries[3];
 
         this.info = '';
-        while(entries.length > 4) {
+        while (entries.length > 4) {
             this.info = entries.pop() + ' ' + this.info;
         }
         this.info = this.info.trim();
@@ -36,11 +36,11 @@ export class Field {
 
 export class Table {
 
-    name: string = '';
-    database: string = '';
-    isCreated: boolean = false;
-    isDeleted: boolean = false;
-    isUpdated: boolean = false;
+    name = '';
+    database = '';
+    isCreated = false;
+    isDeleted = false;
+    isUpdated = false;
     fields: Field[] = [];
 
     constructor(tablename: string, db: string) {
@@ -51,8 +51,8 @@ export class Table {
 
 export class Class {
 
-    name: string = '';
-    inherits: string = '';
+    name = '';
+    inherits = '';
     implements: string[] = [];
 
     constructor(xrefinfo: string) {
@@ -63,7 +63,7 @@ export class Class {
         const entries = xrefinfo.split(',');
         this.name = entries[0];
         for (let i = 1; i < entries.length; i++) {
-            let entry = entries[i];
+            const entry = entries[i];
             if (entry.startsWith('INHERITS')) {
                 this.inherits = entry.split(' ')[1];
             }

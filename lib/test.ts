@@ -1,18 +1,18 @@
-import { Parser } from "./parser";
-import { Searcher } from "./searcher";
+import { Parser } from './parser';
+import { Searcher } from './searcher';
 
 console.log('start parsing:', new Date().toLocaleTimeString());
 
-let parser = new Parser();
-let xrefdata = parser.parseDir('c:/usr/xref', 'D:\\wintmp\\build492943069\\devmain\\');
+const parser = new Parser();
+const xrefdata = parser.parseDir('c:/usr/xref', 'D:\\wintmp\\build492943069\\devmain\\');
 
 console.log('end parsing:  ', new Date().toLocaleTimeString());
 
 
-let searcher = new Searcher(xrefdata);
+const searcher = new Searcher(xrefdata);
 
 const t1 = Date.now();
-let tables = searcher
+const tables = searcher
                 .getTabelReferences('Klantbes', undefined, true, undefined)
                 .map(table => table.sourcefile);
 

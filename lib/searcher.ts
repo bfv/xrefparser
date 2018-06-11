@@ -1,4 +1,4 @@
-import { XrefFile } from "./xreffile";
+import { XrefFile } from './xreffile';
 
 
 export class Searcher {
@@ -10,8 +10,8 @@ export class Searcher {
     }
 
     getTabelReferences(tablename: string, creates?: boolean, deletes?: boolean, updates?: boolean) {
-        let result = this.info.filter(xreffile => {
-            let tmp = xreffile.tables.filter(table => table.name == tablename &&
+        const result = this.info.filter(xreffile => {
+            const tmp = xreffile.tables.filter(table => table.name === tablename &&
                                                         (creates === undefined || table.isCreated === creates) &&
                                                         (deletes === undefined || table.isDeleted === deletes));
             return (tmp.length > 0);
