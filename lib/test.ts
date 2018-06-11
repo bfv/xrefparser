@@ -13,7 +13,7 @@ const searcher = new Searcher(xrefdata);
 
 const t1 = Date.now();
 const tables = searcher
-                .getTabelReferences('Klantbes', undefined, true, undefined)
+                .getTabelReferences('Klantbes', true, true , undefined)
                 .map(table => table.sourcefile);
 
 console.log(tables);
