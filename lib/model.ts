@@ -56,6 +56,10 @@ export class Class {
     implements: string[] = [];
 
     constructor(xrefinfo: string) {
+        this.processInfo(xrefinfo);
+    }
+
+    private processInfo(xrefinfo: string) {
         const entries = xrefinfo.split(',');
         this.name = entries[0];
         for (let i = 1; i < entries.length; i++) {
