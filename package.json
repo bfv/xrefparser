@@ -1,0 +1,31 @@
+{
+  "name": "xrefparser",
+  "version": "0.0.1",
+  "description": "OpenEdge XREF parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bfv/xrefparser.git"
+  },
+  "keywords": [
+    "openedge",
+    "xref",
+    "db",
+    "analyses"
+  ],
+  "author": "bfv <dev@bfv.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bfv/xrefparser/issues"
+  },
+  "homepage": "https://github.com/bfv/xrefparser#readme",
+  "devDependencies": {
+    "typescript": "^2.9.1"
+  },
+  "dependencies": {
+    "@types/node": "^10.3.2"
+  }
+}
