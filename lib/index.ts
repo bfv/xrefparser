@@ -1,4 +1,6 @@
 
 export { Parser } from './parser';
 export { XrefFile } from './xreffile';
-export { Field, Table } from './model';
+export { Class, Field, Table } from './model';
+export { Searcher } from './searcher';
+
