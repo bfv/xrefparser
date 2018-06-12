@@ -16,14 +16,16 @@ export class Parser {
         if (fs.existsSync(dirname)) {
 
             this.readFiles(dirname, []).forEach(file => {
-                const xreffile = this.parseFile(file, sourcebasedir);
 
-                const targetFile = xreffile.xreffile.replace('/xref/', '/xrefjson/') + '.json';
-                const targetDir = path.dirname(targetFile);
-                this.mkdir(targetDir);
+                if (path.extname(file) === '.xref') {
+                    const xreffile = this.parseFile(file, sourcebasedir);
+                    const targetFile = xreffile.xreffile.replace('/xref/', '/xrefjson/') + '.json';
+                    const targetDir = path.dirname(targetFile);
+                    this.mkdir(targetDir);
 
-                fs.writeFileSync(targetFile, JSON.stringify(xreffile, undefined, 2));
-                parsed.push(xreffile);
+                    fs.writeFileSync(targetFile, JSON.stringify(xreffile, undefined, 2));
+                    parsed.push(xreffile);
+                }
             });
 
         }
