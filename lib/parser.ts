@@ -67,6 +67,12 @@ export class Parser {
                 case 'COMPILE':
                     this.processCompile(xrefline, xreffile);
                     break;
+                case 'CPINTERNAL':
+                    this.processCpInternal(xrefline, xreffile);
+                    break;
+                case 'CPSTREAM':
+                    this.processCpStream(xrefline, xreffile);
+                    break;
                 case 'INCLUDE':
                     this.processInclude(xrefline, xreffile);
                     break;
@@ -78,6 +84,14 @@ export class Parser {
                     break;
             }
         }
+    }
+
+    private processCpInternal(xrefline: XrefLine, xreffile: XrefFile) {
+        xreffile.cpInternal = xrefline.info;
+    }
+
+    private processCpStream(xrefline: XrefLine, xreffile: XrefFile) {
+        xreffile.cpStream = xrefline.info;
     }
 
     private processClass(xrefline: XrefLine, xreffile: XrefFile) {

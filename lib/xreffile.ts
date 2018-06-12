@@ -6,6 +6,8 @@ export class XrefFile {
     xreffile = '';
     sourcefile = '';
     class?: Class;
+    cpInternal = '';
+    cpStream = '';
     includes: string[] = [];
     tablenames: string[] = [];
     classes: string[] = [];
