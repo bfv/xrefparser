@@ -33,7 +33,7 @@ export class Parser {
         return parsed;
     }
 
-    parseFile(file: string, sourcebasedir?: string) {
+    private parseFile(file: string, sourcebasedir?: string) {
 
         const xreffile = new XrefFile(file);
 
