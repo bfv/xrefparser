@@ -23,7 +23,7 @@ console.log(sources);
 ```
 
 ## Parser class
-When instantiated there's beasically on relevant method; parseDir
+When instantiated there's basically one relevant method; parseDir
 
 ### parseDir
 ```
