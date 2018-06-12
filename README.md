@@ -10,12 +10,12 @@ Searching the sources which contain creates and deletes of in 'Klantbes' table i
 import { Parser, Searcher } from 'xrefparser';
 
 const parser = new Parser();
-const xrefdata = parser.parseDir('c:/usr/xref', 'D:\\wintmp\\build492943069\\devmain\\');  // dir xref files, compilation base dir
+const xrefdata = parser.parseDir('c:/usr/xref', 'D:\\wintmp\\build492943069\\devmain\\');
 
 const searcher = new Searcher(xrefdata);
 
 const sources = searcher
-                .getTabelReferences('Klantbes', true, undefined, true)  // tablename, hasCreates, hasUpdates, hasDeletes
+                .getTabelReferences('Klantbes', true, undefined, true)
                 .map(table => table.sourcefile);
 
 console.log(sources);
@@ -26,7 +26,10 @@ console.log(sources);
 When instantiated there's beasically on relevant method; parseDir
 
 ### parseDir
-```parseDir(dirname: string, sourcebasedir?: string): XrefFile[]```
+```
+parseDir(dirname: string, sourcebasedir?: string): XrefFile[]
+```
+
 `dirname` is the root directory where all the .xref files are located.
 `sourcebasedir` is the optional parameter stating what the root directory of the sources when they were compiled. This is substracted from the `sourcefile` properties.
 
@@ -35,9 +38,11 @@ Right now the `Searcher` class has 1 method:
 The only constructor takes `XrefFile[]` as input.
 
 ### getTabelReferences
-```getTabelReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): string[]```
+```
+getTabelReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): string[]
+```
 
-Looks for uses of `tablename` in the all the `Xreffile` objects and returns an array of source names. If for the `has*` parameters `undefined` is used, the particular action is not searched for. This contrary to `hasCreated = false` where sources are returned that do *not* create the particular table.
+Looks for uses of `tablename` in the all the `Xreffile` objects and returns `XrefFile[]`. Use `map` as in the example to turn it into an array of source names (or whatever you want). If for the `has*` parameters `undefined` is used, the particular action is not searched for. This contrary to `hasCreated = false` where sources are returned that do *not* create the particular table.
 
 ## Performance
 Above case takes on a Dell XPS15 9560 around 8s to parse all the xref files and 3ms to search for create/delete references in the 'Klantbes' table.
