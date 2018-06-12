@@ -61,6 +61,9 @@ export class Parser {
         }
         else {
             switch (xrefline.type) {
+                case 'ANNOTATION':
+                    this.processAnnotation(xrefline, xreffile);
+                    break;
                 case 'CLASS':
                     this.processClass(xrefline, xreffile);
                     break;
@@ -84,6 +87,10 @@ export class Parser {
                     break;
             }
         }
+    }
+
+    private processAnnotation(xrefline: XrefLine, xreffile: XrefFile) {
+        xreffile.annotations.push(xrefline.info);
     }
 
     private processCpInternal(xrefline: XrefLine, xreffile: XrefFile) {

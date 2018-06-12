@@ -12,6 +12,7 @@ export class XrefFile {
     tablenames: string[] = [];
     classes: string[] = [];
     invokes: string[] = [];
+    annotations: string[] = [];
     tables: Table[] = [];
 
     constructor(file: string) {
