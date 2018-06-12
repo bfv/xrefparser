@@ -15,7 +15,7 @@ export class Searcher {
         const noCriteria = (hasCreates === undefined && hasUpdates === undefined && hasDeletes === undefined);
 
         const result = this.info.filter(xreffile => {
-            const tmp = xreffile.tables.filter(table => table.name === tablename && (
+            const tmp = xreffile.tables.filter(table => table.name.toLowerCase() === tablename.toLowerCase() && (
                                                         (hasCreates !== undefined && table.isCreated === hasCreates) ||
                                                         (hasUpdates !== undefined && table.isUpdated === hasUpdates) ||
                                                         (hasDeletes !== undefined && table.isDeleted === hasDeletes) ||
