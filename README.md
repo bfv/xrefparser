@@ -43,6 +43,13 @@ add(xreffiles: Xreffile[]);
 
 This method add/merges the `xreffiles` into the existing Xreffile[]'s.
 
+### getDatabaseNames
+```
+getDatabaseNames(sources?: string[]): string[]
+```
+
+Returns an array of database names found in `sources`. If `sources` is undefined, all the database names of all sources are returned.
+
 ### getDatabaseReferences
 ```
 getDatabaseReferences(databaseName: string): XrefFile[]
