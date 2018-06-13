@@ -34,12 +34,18 @@ parseDir(dirname: string, sourcebasedir?: string): XrefFile[]
 `sourcebasedir` is the optional parameter stating what the root directory of the sources when they were compiled. This is substracted from the `sourcefile` properties.
 
 ## Searcher class
-Right now the `Searcher` class has 1 method:
 The only constructor takes `XrefFile[]` as input.
+
+### add
+```
+add(xreffiles: Xreffile[]);
+```
+
+This method add/merges the xreffiles into the existing Xreffile[]'s.
 
 ### getTabelReferences
 ```
-getTabelReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): string[]
+getTabelReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): Xreffile[]
 ```
 
 Looks for uses of `tablename` in the all the `Xreffile` objects and returns `XrefFile[]`. Use `map` as in the example to turn it into an array of source names (or whatever you want). If for the `has*` parameters `undefined` is used, the particular action is not searched for. This contrary to `hasCreated = false` where sources are returned that do *not* create the particular table.
