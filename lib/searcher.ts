@@ -10,7 +10,7 @@ export class Searcher {
     }
 
 
-    getTabelReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean) {
+    getTabelReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): XrefFile[] {
 
         const noCriteria = (hasCreates === undefined && hasUpdates === undefined && hasDeletes === undefined);
 
@@ -21,6 +21,35 @@ export class Searcher {
                 (hasDeletes !== undefined && table.isDeleted === hasDeletes) ||
                 (noCriteria)));
             return (tmp.length > 0);
+        });
+
+        return result;
+    }
+
+    getFieldReferences(fieldname: string, tablename?: string, hasUpdates?: boolean): XrefFile[] {
+
+        let xreffiles: XrefFile[] = [];
+        if (tablename !== undefined) {
+            xreffiles = this.getTabelReferences(tablename);
+        }
+        else {
+            xreffiles = this.info;
+        }
+
+        const noCriteria = (hasUpdates === undefined);
+
+        const result = xreffiles.filter(xreffile => {
+
+            let found = false;
+            xreffile.tables.forEach(element => {
+                const fieldIndex = element.fields.findIndex(item => item.name.toLowerCase() === fieldname.toLowerCase() &&
+                                                    (noCriteria || (hasUpdates !== undefined && item.isUpdated === hasUpdates)));
+                if (fieldIndex >= 0) {
+                    found = true;
+                }
+            });
+
+            return found;
         });
 
         return result;

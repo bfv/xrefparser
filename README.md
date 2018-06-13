@@ -41,7 +41,15 @@ The only constructor takes `XrefFile[]` as input.
 add(xreffiles: Xreffile[]);
 ```
 
-This method add/merges the xreffiles into the existing Xreffile[]'s.
+This method add/merges the `xreffiles` into the existing Xreffile[]'s.
+
+### getFieldReferences
+```
+getFieldReferences(fieldname: string, tablename?: string, hasUpdates?: boolean): XrefFile[]
+```
+
+Looks for occurences of `fieldname`, optionally in table `tablename`. The optional `hasUpdates` parameter gives the possibility the search for sources which update a certain field (or not). If `tablename` or `hasUpdates` are not to be taken into consideration, omit them or pass `undefined`.
+
 
 ### getTabelReferences
 ```
@@ -58,3 +66,61 @@ There are around 3850 xref files which are combined 350MB on disk.
 This being an early version of this package there are a few assumptions:
 - xref files have a .xref extension
 - the root directory of all the xref files is called `xref`
+
+## Example `Xreffile`
+The `Parser` turns in the `.xref` files into an array of `Xreffile` objects. Beneath an example which is pretty self explanatory:
+```
+{
+  "xreffile": "C:/devoe/sandbox/src/xref_out/xref/CustomerBE.cls.xref",
+  "sourcefile": "xref/CustomerBE.cls",
+  "cpInternal": "UTF-8",
+  "cpStream": "UTF-8",
+  "includes": [
+    "xref/findfirstcustomer.i"
+  ],
+  "tablenames": [
+    "Customer"
+  ],
+  "classes": [],
+  "invokes": [
+    "xref.BaseClass:Cleanup",
+    "xref.BusinessEntity:BusinessEntity",
+    "xref.CustomerBE:Cleanup"
+  ],
+  "annotations": [
+    "todo(version=12.x, message=refactor for efficiency)",
+    "linecheck(lineno=44)",
+    "linecheck(lineno=46)"
+  ],
+  "tables": [
+    {
+      "name": "Customer",
+      "database": "sports2000",
+      "isCreated": false,
+      "isDeleted": false,
+      "isUpdated": true,
+      "fields": [
+        {
+          "name": "CustNum",
+          "isUpdated": false
+        },
+        {
+          "name": "CreditLimit",
+          "isUpdated": true
+        },
+        {
+          "name": "Name",
+          "isUpdated": false
+        }
+      ]
+    }
+  ],
+  "class": {
+    "name": "xref.CustomerBE",
+    "inherits": "xref.BusinessEntity",
+    "implements": [
+      "xref.IDisposable"
+    ]
+  }
+}
+```
