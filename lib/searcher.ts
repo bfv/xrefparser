@@ -9,6 +9,20 @@ export class Searcher {
         this.info = info;
     }
 
+    getDatabaseNames(sources?: string[]): string[] {
+
+        const dbnames: string[] = [];
+
+        this.info
+            .filter(xreffile => sources === undefined || (sources.findIndex(source => source === xreffile.sourcefile) >= 0))
+            .forEach(item => {
+                item.tables.forEach(table => {
+                    dbnames.push(table.database);
+                });
+            });
+
+        return [...new Set(dbnames)];
+    }
 
     getTabelReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): XrefFile[] {
 
