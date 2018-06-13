@@ -26,16 +26,18 @@ export class Searcher {
         return result;
     }
 
-    add(xreffile: XrefFile) {
+    add(xreffiles: XrefFile[]) {
 
-        const i = this.info.findIndex(item => item.sourcefile === xreffile.sourcefile);
+        xreffiles.forEach(xreffile => {
+            const i = this.info.findIndex(item => item.sourcefile === xreffile.sourcefile);
 
-        if (i === -1) {
-            this.info.push(xreffile);
-        }
-        else {
-            this.info[i] = xreffile;
-        }
+            if (i === -1) {
+                this.info.push(xreffile);
+            }
+            else {
+                this.info[i] = xreffile;
+            }
+        });
     }
 
 }
