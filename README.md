@@ -43,6 +43,13 @@ add(xreffiles: Xreffile[]);
 
 This method add/merges the `xreffiles` into the existing Xreffile[]'s.
 
+### getDatabaseReferences
+```
+getDatabaseReferences(databaseName: string): XrefFile[]
+```
+
+Returns an array  with all the `XrefFile` contains references to the `databaseName`
+
 ### getFieldReferences
 ```
 getFieldReferences(fieldname: string, tablename?: string, hasUpdates?: boolean): XrefFile[]

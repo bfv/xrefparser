@@ -69,6 +69,20 @@ export class Searcher {
         return result;
     }
 
+    getDatabaseReferences(databaseName: string): XrefFile[] {
+
+        const references: XrefFile[] = [];
+
+        this.info.forEach(xreffile => {
+            const tables = xreffile.tables.filter(table => table.database.toLowerCase() === databaseName.toLowerCase());
+            if (tables.length > 0) {
+                references.push(xreffile);
+            }
+        });
+
+        return references;
+    }
+
     add(xreffiles: XrefFile[]) {
 
         xreffiles.forEach(xreffile => {
