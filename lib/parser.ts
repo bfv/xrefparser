@@ -6,7 +6,7 @@ import { XrefFile } from './xreffile';
 
 export class Parser {
 
-    private crudIgnore = ['PUBLIC-DATA-MEMBER', 'PUBLIC-PROPERTY', 'SHARED'];
+    private crudIgnore = ['PUBLIC-DATA-MEMBER', 'PUBLIC-PROPERTY', 'SHARED', 'DATA-MEMBER'];
     private crudTypes = ['ACCESS', 'UPDATE', 'CREATE', 'DELETE'];
 
     parseDir(dirname: string, sourcebasedir?: string): XrefFile[] {
@@ -118,24 +118,26 @@ export class Parser {
 
     private processCrud(xrefline: XrefLine, xreffile: XrefFile) {
 
+        const tablepart = xrefline.info.split(' ');
+        if (this.crudIgnore.indexOf(tablepart[0]) >= 0) {
+            return;
+        }
+
+        if (tablepart[1] === 'WORKFILE' || tablepart[1] === 'TEMPTABLE') {
+            return;
+        }
+
         if (xrefline.type === 'ACCESS' || xrefline.type === 'UPDATE') {
 
-            const tablepart = xrefline.info.split(' ');
-            if (this.crudIgnore.indexOf(tablepart[0]) < 0) {
-                const tableinfo = tablepart[0].split('.');
-                if (tableinfo[1] !== undefined) {
-                    const table = xreffile.addTable(tableinfo[1], tableinfo[0], false, false, xrefline.type === 'UPDATE');
-                    xreffile.addField(tablepart[1], table, xrefline.type === 'UPDATE');
-                }
+            const tableinfo = tablepart[0].split('.');
+            if (tableinfo[1] !== undefined) {
+                const table = xreffile.addTable(tableinfo[1], tableinfo[0], false, false, xrefline.type === 'UPDATE');
+                xreffile.addField(tablepart[1], table, xrefline.type === 'UPDATE');
             }
         }
         else if (xrefline.type === 'CREATE' || xrefline.type === 'DELETE') {
-
-            const tablepart = xrefline.info.split(' ');
-            if (tablepart[1] !== 'TEMPTABLE') {
-                const tableinfo = tablepart[0].split('.');
-                xreffile.addTable(tableinfo[1], tableinfo[0], xrefline.type === 'CREATE', xrefline.type === 'DELETE');
-            }
+            const tableinfo = tablepart[0].split('.');
+            xreffile.addTable(tableinfo[1], tableinfo[0], xrefline.type === 'CREATE', xrefline.type === 'DELETE');
         }
     }
 
