@@ -36,7 +36,7 @@ export class Searcher {
                 item.tables.forEach(table => {
                     const idx = tables.findIndex(tbl => tbl.database === table.database && tbl.table === table.name);
                     if (idx === -1) {
-                        tables.push({ table: table.name, database: table.database});
+                        tables.push({ table: table.name, database: table.database.toLowerCase()});
                     }
                 });
             });
