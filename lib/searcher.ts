@@ -1,4 +1,6 @@
 import { XrefFile } from './xreffile';
+import { Table, TableDefintion } from './model';
+import { ENGINE_METHOD_NONE } from 'constants';
 
 
 export class Searcher {
@@ -24,34 +26,22 @@ export class Searcher {
         return [...new Set(dbnames)];
     }
 
-    getTableNames(sources?: string[], dbPrefixed = false, sortOnTable = false) {
+    getTableNames(sources?: string[]): TableDefintion[] {
 
-        const tmp: { table: string, fq: string }[] = [];
-        let tablenames: string[] = [];
+        const tables: TableDefintion[] = [];
 
         this.info
             .filter(xreffile => sources === undefined || (sources.findIndex(source => source === xreffile.sourcefile) >= 0))
             .forEach(item => {
                 item.tables.forEach(table => {
-                    tmp.push({ table: table.name, fq: table.database + '.' + table.name });
+                    const idx = tables.findIndex(tbl => tbl.database === table.database && tbl.table === table.name);
+                    if (idx === -1) {
+                        tables.push({ table: table.name, database: table.database});
+                    }
                 });
             });
 
-        if (sortOnTable) {
-            tmp.sort((a, b) => a.table.toLowerCase() < b.table.toLowerCase() ? -1 : 1);
-        }
-        else {
-            tmp.sort((a, b) => a.fq.toLowerCase() < b.fq.toLowerCase() ? -1 : 1);
-        }
-
-        if (dbPrefixed) {
-            tablenames = tmp.map(item => item.fq);
-        }
-        else {
-            tablenames = tmp.map(item => item.table);
-        }
-
-        return [...new Set(tablenames)];
+        return tables;
     }
 
     getTabelReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): XrefFile[] {

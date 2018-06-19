@@ -74,3 +74,7 @@ export class Class {
     }
 }
 
+export interface TableDefintion {
+    table: string;
+    database: string;
+}
