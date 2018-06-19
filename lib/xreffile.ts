@@ -43,6 +43,11 @@ export class XrefFile {
     }
 
     addField(fieldname: string, table: Table, isUpdated: boolean = false) {
+
+        if (fieldname === undefined || fieldname.trim() === '') {
+            return;
+        }
+
         let field = table.fields.filter(fld => fld.name === fieldname)[0];
         if (field === undefined) {
             field = new Field(fieldname);
