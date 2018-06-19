@@ -24,6 +24,36 @@ export class Searcher {
         return [...new Set(dbnames)];
     }
 
+    getTableNames(sources?: string[], dbPrefixed = false, sortOnTable = false) {
+
+        const tmp: { table: string, fq: string }[] = [];
+        let tablenames: string[] = [];
+
+        this.info
+            .filter(xreffile => sources === undefined || (sources.findIndex(source => source === xreffile.sourcefile) >= 0))
+            .forEach(item => {
+                item.tables.forEach(table => {
+                    tmp.push({ table: table.name, fq: table.database + '.' + table.name });
+                });
+            });
+
+        if (sortOnTable) {
+            tmp.sort((a, b) => a.table.toLowerCase() < b.table.toLowerCase() ? -1 : 1);
+        }
+        else {
+            tmp.sort((a, b) => a.fq.toLowerCase() < b.fq.toLowerCase() ? -1 : 1);
+        }
+
+        if (dbPrefixed) {
+            tablenames = tmp.map(item => item.fq);
+        }
+        else {
+            tablenames = tmp.map(item => item.table);
+        }
+
+        return [...new Set(tablenames)];
+    }
+
     getTabelReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): XrefFile[] {
 
         const noCriteria = (hasCreates === undefined && hasUpdates === undefined && hasDeletes === undefined);
@@ -57,7 +87,7 @@ export class Searcher {
             let found = false;
             xreffile.tables.forEach(element => {
                 const fieldIndex = element.fields.findIndex(item => item.name.toLowerCase() === fieldname.toLowerCase() &&
-                                                    (noCriteria || (hasUpdates !== undefined && item.isUpdated === hasUpdates)));
+                    (noCriteria || (hasUpdates !== undefined && item.isUpdated === hasUpdates)));
                 if (fieldIndex >= 0) {
                     found = true;
                 }
