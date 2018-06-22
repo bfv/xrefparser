@@ -21,7 +21,7 @@ export class Searcher {
             .filter(xreffile => sources === undefined || (sources.findIndex(source => source === xreffile.sourcefile) >= 0))
             .forEach(item => {
                 item.tables.forEach(table => {
-                    dbnames.push(table.database);
+                    dbnames.push(table.database.toLowerCase());
                 });
             });
 
