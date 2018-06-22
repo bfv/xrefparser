@@ -5,10 +5,12 @@ import { ENGINE_METHOD_NONE } from 'constants';
 
 export class Searcher {
 
-    private info: XrefFile[];
+    private info: XrefFile[] = [];
 
-    constructor(info: XrefFile[]) {
-        this.info = info;
+    constructor(info?: XrefFile[]) {
+        if (info !== undefined) {
+            this.info = info;
+        }
     }
 
     getDatabaseNames(sources?: string[]): string[] {
@@ -36,7 +38,7 @@ export class Searcher {
                 item.tables.forEach(table => {
                     const idx = tables.findIndex(tbl => tbl.database === table.database && tbl.table === table.name);
                     if (idx === -1) {
-                        tables.push({ table: table.name, database: table.database.toLowerCase()});
+                        tables.push({ table: table.name, database: table.database.toLowerCase() });
                     }
                 });
             });
