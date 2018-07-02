@@ -46,7 +46,7 @@ export class Searcher {
         return tables;
     }
 
-    getTabelReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): XrefFile[] {
+    getTableReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): XrefFile[] {
 
         const noCriteria = (hasCreates === undefined && hasUpdates === undefined && hasDeletes === undefined);
 
@@ -66,7 +66,7 @@ export class Searcher {
 
         let xreffiles: XrefFile[] = [];
         if (tablename !== undefined) {
-            xreffiles = this.getTabelReferences(tablename);
+            xreffiles = this.getTableReferences(tablename);
         }
         else {
             xreffiles = this.info;
@@ -77,14 +77,17 @@ export class Searcher {
         const result = xreffiles.filter(xreffile => {
 
             let found = false;
-            xreffile.tables.forEach(element => {
-                const fieldIndex = element.fields.findIndex(item => item.name.toLowerCase() === fieldname.toLowerCase() &&
-                    (noCriteria || (hasUpdates !== undefined && item.isUpdated === hasUpdates)));
-                if (fieldIndex >= 0) {
-                    found = true;
+            for (let i = 0; i < xreffile.tables.length; i++) {
+                const table = xreffile.tables[i];
+                if (tablename === undefined || (table.name.toLowerCase() === tablename.toLowerCase())) {
+                    const fieldIndex = table.fields.findIndex(field => field.name.toLowerCase() === fieldname.toLowerCase() &&
+                        (noCriteria || (hasUpdates !== undefined && field.isUpdated === hasUpdates)));
+                    if (fieldIndex >= 0) {
+                        found = true;
+                        break;
+                    }
                 }
-            });
-
+            }
             return found;
         });
 
