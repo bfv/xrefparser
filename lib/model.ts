@@ -78,3 +78,8 @@ export interface TableDefintion {
     table: string;
     database: string;
 }
+
+export class MethodInvocation {
+    class = '';
+    methods: string[] = [];
+}

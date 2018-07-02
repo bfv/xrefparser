@@ -150,9 +150,18 @@ export class Parser {
     }
 
     private processInvoke(xrefline: XrefLine, xreffile: XrefFile) {
+        const invokeInfo = xrefline.info.split(':');
+        const method = invokeInfo[1];
+        const fqclass = invokeInfo[0];
 
-        if (xreffile.invokes.indexOf(xrefline.info) < 0) {
-            xreffile.invokes.push(xrefline.info);
+        let classObject = xreffile.invokes.filter(invoke => invoke.class === fqclass)[0];
+        if (!classObject) {
+            classObject = { class: fqclass, methods: [] };
+            xreffile.invokes.push(classObject);
+        }
+        console.log(classObject.methods, method);
+        if (classObject.methods.indexOf(method) < 0) {
+            classObject.methods.push(method);
         }
 
     }

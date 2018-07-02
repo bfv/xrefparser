@@ -1,5 +1,5 @@
 
-import { Table, Field, Class } from './model';
+import { Table, Field, Class, MethodInvocation } from './model';
 
 export class XrefFile {
 
@@ -11,7 +11,7 @@ export class XrefFile {
     includes: string[] = [];
     tablenames: string[] = [];
     instantiates: string[] = [];
-    invokes: string[] = [];
+    invokes: MethodInvocation[] = [];
     annotations: string[] = [];
     tables: Table[] = [];
 
@@ -62,7 +62,7 @@ export class XrefFile {
     finish() {
         this.instantiates.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
         this.includes.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
-        this.invokes.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
+        this.invokes.sort((a, b) => a.class.toLowerCase() < b.class.toLowerCase() ? -1 : 1);
         this.tablenames.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
     }
 }
