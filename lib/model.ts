@@ -88,3 +88,9 @@ export class Procedure {
     name = '';
     private = false;
 }
+
+export class Run {
+    name = '';
+    persistent = false;
+    dynamic = false;
+}

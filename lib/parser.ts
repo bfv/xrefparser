@@ -90,6 +90,10 @@ export class Parser {
                     break;
                 case 'PRIVATE-PROCEDURE':
                     this.processProcedure(xrefline, xreffile, true);
+                    break;
+                case 'RUN':
+                    this.processRun(xrefline, xreffile);
+                    break;
             }
         }
     }
@@ -177,7 +181,23 @@ export class Parser {
 
     private processProcedure(xrefline: XrefLine, xreffile: XrefFile, isPrivate: boolean) {
         const procInfo = xrefline.info.split(',');
-        xreffile.procedures.push({ name: procInfo[0], private: isPrivate});
+        xreffile.procedures.push({ name: procInfo[0], private: isPrivate });
+    }
+
+    private processRun(xrefline: XrefLine, xreffile: XrefFile) {
+
+        const procInfo = xrefline.info.split(' ');
+
+        let runObject = xreffile.runs.filter(run => run.name === procInfo[0])[0];
+        if (!runObject) {
+            runObject = {
+                name: procInfo[0],
+                persistent: (procInfo[1] !== undefined && procInfo[1] === 'PERSISTENT'),
+                dynamic: (procInfo[0].toLowerCase().startsWith('value('))
+            };
+            xreffile.runs.push(runObject);
+        }
+
     }
 
     private readFiles(dirname: string, filelist: string[]) {
