@@ -83,3 +83,8 @@ export class MethodInvocation {
     class = '';
     methods: string[] = [];
 }
+
+export class Procedure {
+    name = '';
+    private = false;
+}

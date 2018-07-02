@@ -85,6 +85,11 @@ export class Parser {
                 case 'NEW':
                     this.processNew(xrefline, xreffile);
                     break;
+                case 'PROCEDURE':
+                    this.processProcedure(xrefline, xreffile, false);
+                    break;
+                case 'PRIVATE-PROCEDURE':
+                    this.processProcedure(xrefline, xreffile, true);
             }
         }
     }
@@ -168,6 +173,11 @@ export class Parser {
 
     private processCompile(xrefline: XrefLine, xreffile: XrefFile) {
         xreffile.setSourceFile(xrefline.info);
+    }
+
+    private processProcedure(xrefline: XrefLine, xreffile: XrefFile, isPrivate: boolean) {
+        const procInfo = xrefline.info.split(',');
+        xreffile.procedures.push({ name: procInfo[0], private: isPrivate});
     }
 
     private readFiles(dirname: string, filelist: string[]) {
