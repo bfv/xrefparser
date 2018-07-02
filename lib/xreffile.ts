@@ -10,7 +10,7 @@ export class XrefFile {
     cpStream = '';
     includes: string[] = [];
     tablenames: string[] = [];
-    classes: string[] = [];
+    instantiates: string[] = [];
     invokes: string[] = [];
     annotations: string[] = [];
     tables: Table[] = [];
@@ -60,7 +60,7 @@ export class XrefFile {
     }
 
     finish() {
-        this.classes.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
+        this.instantiates.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
         this.includes.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
         this.invokes.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
         this.tablenames.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);

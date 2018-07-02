@@ -143,8 +143,8 @@ export class Parser {
 
     private processNew(xrefline: XrefLine, xreffile: XrefFile) {
 
-        if (xreffile.classes.indexOf(xrefline.info) < 0) {
-            xreffile.classes.push(xrefline.info);
+        if (xreffile.instantiates.indexOf(xrefline.info) < 0) {
+            xreffile.instantiates.push(xrefline.info);
         }
 
     }
