@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { XrefLine, Class, Accessor, Method } from './model';
+import { XrefLine, Class, Accessor, Method, Parameter, ParameterMode } from './model';
 import { XrefFile } from './xreffile';
 
 export class Parser {
@@ -227,7 +227,7 @@ export class Parser {
 
         const method: Method = {
             name: methodInfo[5],
-            accessor: <Accessor>methodInfo[0],
+            accessor: <Accessor>methodInfo[0].toLowerCase(),
             static: (methodInfo[1] === 'STATIC'),
             override: (methodInfo[2] === 'OVERRIDE'),
             final: (methodInfo[3] === 'FINAL'),
@@ -237,10 +237,30 @@ export class Parser {
         };
 
         for (let i = 7; i < methodInfo.length; i++) {
-            method.signature.push(methodInfo[i]);
+            const param = this.extractParameter(methodInfo[i]);
+            if (param !== undefined) {
+                method.signature.push(param);
+            }
         }
 
         xreffile.methods.push(method);
+    }
+
+    private extractParameter(paramString: string): Parameter | undefined {
+
+        if (paramString === '') {
+            return undefined;
+        }
+
+        const paramInfo = paramString.split(' ');
+
+        const param: Parameter = {
+            name: paramInfo[1],
+            mode: <ParameterMode>paramInfo[0].toLowerCase(),
+            datatype: (paramInfo[2] ? paramInfo[2].toLowerCase() : '')
+        };
+
+        return param;
     }
 
     private readFiles(dirname: string, filelist: string[]) {

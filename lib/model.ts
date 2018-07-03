@@ -82,14 +82,20 @@ export class Run {
 
 export class Method {
     name = '';
-    accessor: Accessor = 'PUBLIC';  // private is not xreffed
+    accessor: Accessor = 'public';  // private is not xreffed
     static = false;
     override = false;
     final = false;
     abstract = false;
     returntype = '';
-    signature: string[] = [];
+    signature: Parameter[] = [];
 }
 
-export type Accessor = 'PUBLIC' | 'PROTECTED' | 'PRIVATE';
+export class Parameter {
+    name = '';
+    mode: ParameterMode = 'input';
+    datatype = '';
+}
 
+export type Accessor = 'public' | 'protected' | 'private';                     // private is not used with XREF
+export type ParameterMode = 'input' | 'output' | 'input-output' | 'buffer';
