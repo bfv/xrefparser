@@ -57,6 +57,8 @@ export class Class {
     final = false;
     abstract = false;
     serializable = false;
+    constructors: Constructor[] = [];
+    methods: Method[] = [];
 }
 
 export interface TableDefintion {
@@ -88,6 +90,12 @@ export class Method {
     final = false;
     abstract = false;
     returntype = '';
+    signature: Parameter[] = [];
+}
+
+export class Constructor {
+    accessor: Accessor = 'public';  // private is not xreffed
+    static = false;
     signature: Parameter[] = [];
 }
 

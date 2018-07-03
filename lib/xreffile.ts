@@ -1,5 +1,5 @@
 
-import { Table, Field, Class, MethodInvocation, Procedure, Run, Method } from './model';
+import { Table, Field, Class, MethodInvocation, Procedure, Run, Method, Constructor } from './model';
 
 export class XrefFile {
 
@@ -15,7 +15,6 @@ export class XrefFile {
     annotations: string[] = [];
     procedures: Procedure[] = [];
     runs: Run[] = [];
-    methods: Method[] = [];
     tables: Table[] = [];
 
     constructor(file: string) {

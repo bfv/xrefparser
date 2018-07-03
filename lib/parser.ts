@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { XrefLine, Class, Accessor, Method, Parameter, ParameterMode } from './model';
+import { XrefLine, Class, Accessor, Method, Parameter, ParameterMode, Constructor } from './model';
 import { XrefFile } from './xreffile';
 
 export class Parser {
@@ -93,6 +93,9 @@ export class Parser {
                 case 'METHOD':
                     this.processMethod(xrefline, xreffile);
                     break;
+                case 'CONSTRUCTOR':
+                    this.processConstructor(xrefline, xreffile);
+                    break;
             }
         }
     }
@@ -130,7 +133,9 @@ export class Parser {
             useWidgetPool: (entries[3] === 'USE-WIDGET-POOL'),
             final: (entries[4] === 'FINAL'),
             abstract: (entries[5] === 'ABSTRACT'),
-            serializable: (entries[6] === 'SERIALIZABLE')
+            serializable: (entries[6] === 'SERIALIZABLE'),
+            constructors: [],
+            methods: []
         };
 
         xreffile.class = classObj;
@@ -223,6 +228,28 @@ export class Parser {
     }
 
     private processMethod(xrefline: XrefLine, xreffile: XrefFile) {
+        const method = this.extractMethod(xrefline);
+        if (xreffile.class) {
+            xreffile.class.methods.push(method);
+        }
+    }
+
+    private processConstructor(xrefline: XrefLine, xreffile: XrefFile) {
+
+        const method = this.extractMethod(xrefline, true);
+        console.error(method);
+        const constructor: Constructor = {
+            accessor: method.accessor,
+            static: method.static,
+            signature: method.signature
+        };
+
+        if (xreffile.class) {
+            xreffile.class.constructors.push(constructor);
+        }
+    }
+
+    private extractMethod(xrefline: XrefLine, isConstructor = false): Method {
 
         const methodInfo = xrefline.info.split(',');
 
@@ -233,18 +260,19 @@ export class Parser {
             override: (methodInfo[2] === 'OVERRIDE'),
             final: (methodInfo[3] === 'FINAL'),
             abstract: (methodInfo[4] === 'ABSTRACT'),
-            returntype: methodInfo[6],
+            returntype: (isConstructor ? '' : methodInfo[6]),
             signature: []
         };
 
-        for (let i = 7; i < methodInfo.length; i++) {
+        let i = (isConstructor ? 6 : 7);
+        for (; i < methodInfo.length; i++) {
             const param = this.extractParameter(methodInfo[i]);
             if (param !== undefined) {
                 method.signature.push(param);
             }
         }
 
-        xreffile.methods.push(method);
+        return method;
     }
 
     private extractParameter(paramString: string): Parameter | undefined {
@@ -308,20 +336,23 @@ export class Parser {
         // now iterate over all signature
         for (let i = 0; i < xreffiles.length; i++) {
 
-            const methods = xreffiles[i].methods;
-            for (let j = 0; j < methods.length; j++) {
+            const classObj = xreffiles[i].class;
+            if (classObj === undefined) {
+                continue;
+            }
 
-                const signature = methods[j].signature;
-                for (let k = 0; k < signature.length; k++) {
+            this.fixParameterDatatype(classes, classObj.methods);
+            this.fixParameterDatatype(classes, classObj.constructors);
+        }
+    }
 
-                    const param = signature[k];
-                    const classname = classes.filter(element => element.toLowerCase() === param.datatype.toLowerCase())[0];
+    private fixParameterDatatype(classes: string[], array: { signature: Parameter[] }[]) {
+        for (let j = 0; j < array.length; j++) {
 
-                    if (classname !== undefined) {
-                        param.datatype = classname;
-                    }
-                }
-
+            const signature = array[j].signature;
+            for (let k = 0; k < signature.length; k++) {
+                const param = signature[k];    // for clarity
+                param.datatype = classes.filter(element => element.toLowerCase() === param.datatype)[0] || param.datatype;
             }
         }
     }
