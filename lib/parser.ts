@@ -22,8 +22,9 @@ export class Parser {
                     parsed.push(xreffile);
                 }
             });
-
         }
+
+        this.postProcess(parsed);
 
         return parsed;
     }
@@ -189,7 +190,7 @@ export class Parser {
             classObject = { class: fqclass, methods: [] };
             xreffile.invokes.push(classObject);
         }
-        console.log(classObject.methods, method);
+
         if (classObject.methods.indexOf(method) < 0) {
             classObject.methods.push(method);
         }
@@ -293,7 +294,48 @@ export class Parser {
 
     private normalizeSourceFilename(test: string) {
         const result = test.replace(/\\/g, '/');
-
         return result;
+    }
+
+    private postProcess(xreffiles: XrefFile[]) {
+        this.fixClassNames(xreffiles);
+    }
+
+    private fixClassNames(xreffiles: XrefFile[]) {
+
+        const classes = this.getClassNames(xreffiles);
+
+        // now iterate over all signature
+        for (let i = 0; i < xreffiles.length; i++) {
+
+            const methods = xreffiles[i].methods;
+            for (let j = 0; j < methods.length; j++) {
+
+                const signature = methods[j].signature;
+                for (let k = 0; k < signature.length; k++) {
+
+                    const param = signature[k];
+                    const classname = classes.filter(element => element.toLowerCase() === param.datatype.toLowerCase())[0];
+
+                    if (classname !== undefined) {
+                        param.datatype = classname;
+                    }
+                }
+
+            }
+        }
+    }
+
+    private getClassNames(xreffiles: XrefFile[]): string[] {
+
+        const classes: string[] = [];
+        for (let i = 0; i < xreffiles.length; i++) {
+            const xreffile = xreffiles[i];
+            if (xreffile.class !== undefined) {
+                classes.push(xreffile.class.name);
+            }
+        }
+
+        return classes;
     }
 }
