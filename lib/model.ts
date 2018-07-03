@@ -50,28 +50,13 @@ export class Table {
 }
 
 export class Class {
-
     name = '';
-    inherits = '';
+    inherits: string[] = [];
     implements: string[] = [];
-
-    constructor(xrefinfo: string) {
-        this.processInfo(xrefinfo);
-    }
-
-    private processInfo(xrefinfo: string) {
-        const entries = xrefinfo.split(',');
-        this.name = entries[0];
-        for (let i = 1; i < entries.length; i++) {
-            const entry = entries[i];
-            if (entry.startsWith('INHERITS')) {
-                this.inherits = entry.split(' ')[1];
-            }
-            if (entry.startsWith('IMPLEMENTS')) {
-                this.implements.push(entry.split(' ')[1]);
-            }
-        }
-    }
+    useWidgetPool = false;
+    final = false;
+    abstract = false;
+    serializable = false;
 }
 
 export interface TableDefintion {

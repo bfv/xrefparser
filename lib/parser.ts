@@ -114,7 +114,30 @@ export class Parser {
     }
 
     private processClass(xrefline: XrefLine, xreffile: XrefFile) {
-        xreffile.class = new Class(xrefline.info);
+
+        const entries = xrefline.info.split(',');
+
+        let inheritsArray = entries[1].replace('INHERITS', '').trim().split(' ');
+        if (inheritsArray[0] === '') {
+            inheritsArray = [];
+        }
+
+        let implementsArray = entries[2].replace('IMPLEMENTS', '').trim().split(' ');
+        if (implementsArray[0] === '') {
+            implementsArray = [];
+        }
+
+        const classObj: Class = {
+            name: entries[0],
+            inherits: inheritsArray,
+            implements: implementsArray,
+            useWidgetPool: (entries[3] === 'USE-WIDGET-POOL'),
+            final: (entries[4] === 'FINAL'),
+            abstract: (entries[5] === 'ABSTRACT'),
+            serializable: (entries[6] === 'SERIALIZABLE')
+        };
+
+        xreffile.class = classObj;
     }
 
     private processInclude(xrefline: XrefLine, xreffile: XrefFile) {
