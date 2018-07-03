@@ -94,3 +94,17 @@ export class Run {
     persistent = false;
     dynamic = false;
 }
+
+export class Method {
+    name = '';
+    accessor: Accessor = 'PUBLIC';  // private is not xreffed
+    static = false;
+    override = false;
+    final = false;
+    abstract = false;
+    returntype = '';
+    signature: string[] = [];
+}
+
+export type Accessor = 'PUBLIC' | 'PROTECTED' | 'PRIVATE';
+

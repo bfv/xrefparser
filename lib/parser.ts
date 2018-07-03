@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { XrefLine, Class } from './model';
+import { XrefLine, Class, Accessor, Method } from './model';
 import { XrefFile } from './xreffile';
 
 export class Parser {
@@ -93,6 +93,9 @@ export class Parser {
                     break;
                 case 'RUN':
                     this.processRun(xrefline, xreffile);
+                    break;
+                case 'METHOD':
+                    this.processMethod(xrefline, xreffile);
                     break;
             }
         }
@@ -198,6 +201,28 @@ export class Parser {
             xreffile.runs.push(runObject);
         }
 
+    }
+
+    private processMethod(xrefline: XrefLine, xreffile: XrefFile) {
+
+        const methodInfo = xrefline.info.split(',');
+
+        const method: Method = {
+            name: methodInfo[5],
+            accessor: <Accessor>methodInfo[0],
+            static: (methodInfo[1] === 'STATIC'),
+            override: (methodInfo[2] === 'OVERRIDE'),
+            final: (methodInfo[3] === 'FINAL'),
+            abstract: (methodInfo[4] === 'ABSTRACT'),
+            returntype: methodInfo[6],
+            signature: []
+        };
+
+        for (let i = 7; i < methodInfo.length; i++) {
+            method.signature.push(methodInfo[i]);
+        }
+
+        xreffile.methods.push(method);
     }
 
     private readFiles(dirname: string, filelist: string[]) {
