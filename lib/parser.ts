@@ -19,11 +19,6 @@ export class Parser {
 
                 if (path.extname(file) === '.xref') {
                     const xreffile = this.parseFile(file, sourcebasedir);
-                    const targetFile = xreffile.xreffile.replace('/xref/', '/xrefjson/') + '.json';
-                    const targetDir = path.dirname(targetFile);
-                    this.mkdir(targetDir);
-
-                    fs.writeFileSync(targetFile, JSON.stringify(xreffile, undefined, 2));
                     parsed.push(xreffile);
                 }
             });
