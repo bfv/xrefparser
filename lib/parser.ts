@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { XrefLine, Class, Accessor, Method, Parameter, ParameterMode, Constructor } from './model';
+import { XrefLine, Class, Accessor, Method, Parameter, ParameterMode, Constructor, Interface } from './model';
 import { XrefFile } from './xreffile';
 
 export class Parser {
@@ -96,6 +96,9 @@ export class Parser {
                 case 'CONSTRUCTOR':
                     this.processConstructor(xrefline, xreffile);
                     break;
+                case 'INTERFACE':
+                    this.processInterface(xrefline, xreffile);
+                    break;
             }
         }
     }
@@ -139,6 +142,23 @@ export class Parser {
         };
 
         xreffile.class = classObj;
+    }
+
+    private processInterface(xrefline: XrefLine, xreffile: XrefFile) {
+
+        const entries = xrefline.info.split(',');
+        let inheritsArray = entries[1].replace('INHERITS', '').trim().split(' ');
+        if (inheritsArray[0] === '') {
+            inheritsArray = [];
+        }
+
+        const interfaceObj: Interface = {
+            name: entries[0],
+            inherits: inheritsArray,
+            methods: []
+        };
+
+        xreffile.interface = interfaceObj;
     }
 
     private processInclude(xrefline: XrefLine, xreffile: XrefFile) {
@@ -231,6 +251,9 @@ export class Parser {
         const method = this.extractMethod(xrefline);
         if (xreffile.class) {
             xreffile.class.methods.push(method);
+        }
+        else if (xreffile.interface) {
+            xreffile.interface.methods.push(method);
         }
     }
 

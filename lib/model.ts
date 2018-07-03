@@ -107,3 +107,9 @@ export class Parameter {
 
 export type Accessor = 'public' | 'protected' | 'private';                     // private is not used with XREF
 export type ParameterMode = 'input' | 'output' | 'input-output' | 'buffer';
+
+export class Interface {
+    name = '';
+    inherits: string[] = [];
+    methods: Method[] = [];
+}

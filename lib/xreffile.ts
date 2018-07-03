@@ -1,11 +1,12 @@
 
-import { Table, Field, Class, MethodInvocation, Procedure, Run, Method, Constructor } from './model';
+import { Table, Field, Class, MethodInvocation, Procedure, Run, Method, Constructor, Interface } from './model';
 
 export class XrefFile {
 
     xreffile = '';
     sourcefile = '';
     class?: Class;
+    interface?: Interface;
     cpInternal = '';
     cpStream = '';
     includes: string[] = [];
