@@ -66,6 +66,9 @@ export class Parser {
                 case 'COMPILE':
                     this.processCompile(xrefline, xreffile);
                     break;
+                case 'CONSTRUCTOR':
+                    this.processConstructor(xrefline, xreffile);
+                    break;
                 case 'CPINTERNAL':
                     this.processCpInternal(xrefline, xreffile);
                     break;
@@ -75,8 +78,14 @@ export class Parser {
                 case 'INCLUDE':
                     this.processInclude(xrefline, xreffile);
                     break;
+                case 'INTERFACE':
+                    this.processInterface(xrefline, xreffile);
+                    break;
                 case 'INVOKE':
                     this.processInvoke(xrefline, xreffile);
+                    break;
+                case 'METHOD':
+                    this.processMethod(xrefline, xreffile);
                     break;
                 case 'NEW':
                     this.processNew(xrefline, xreffile);
@@ -89,15 +98,6 @@ export class Parser {
                     break;
                 case 'RUN':
                     this.processRun(xrefline, xreffile);
-                    break;
-                case 'METHOD':
-                    this.processMethod(xrefline, xreffile);
-                    break;
-                case 'CONSTRUCTOR':
-                    this.processConstructor(xrefline, xreffile);
-                    break;
-                case 'INTERFACE':
-                    this.processInterface(xrefline, xreffile);
                     break;
             }
         }
