@@ -1,4 +1,8 @@
 # Release notes XREFPARSER
+For details see: https://github.com/bfv/xrefparser
+
+## 2.1.0
+- Configurable Parser via ParserConfig class
 
 ## 2.0.0
 - normalized invoke info
