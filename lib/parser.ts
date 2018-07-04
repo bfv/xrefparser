@@ -407,7 +407,9 @@ export class Parser {
     }
 
     private postProcess(xreffiles: XrefFile[]) {
-        this.fixClassNames(xreffiles);
+        if (this.config.methods || this.config.constructors) {
+            this.fixClassNames(xreffiles);
+        }
     }
 
     private fixClassNames(xreffiles: XrefFile[]) {
@@ -422,8 +424,13 @@ export class Parser {
                 continue;
             }
 
-            this.fixParameterDatatype(classes, classObj.methods);
-            this.fixParameterDatatype(classes, classObj.constructors);
+            if (this.config.methods) {
+                this.fixParameterDatatype(classes, classObj.methods);
+            }
+
+            if (this.config.constructors) {
+                this.fixParameterDatatype(classes, classObj.constructors);
+            }
         }
     }
 
