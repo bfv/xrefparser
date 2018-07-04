@@ -6,8 +6,62 @@ import { XrefFile } from './xreffile';
 
 export class Parser {
 
+    private config: ParserConfig;
     private crudIgnore = ['PUBLIC-DATA-MEMBER', 'PUBLIC-PROPERTY', 'SHARED', 'DATA-MEMBER'];
     private crudTypes = ['ACCESS', 'UPDATE', 'CREATE', 'DELETE'];
+    private typesToProcess = [
+        'ANNOTATION', 'CLASS', 'COMPILE', 'CONSTRUCTOR', 'CPINTERNAL', 'CPSTREAM',
+        'INCLUDE', 'INTERFACE', 'INVOKE', 'METHOD', 'NEW', 'PROCEDURE',
+        'PRIVATE-PROCEDURE', 'RUN'
+    ];
+
+    constructor(config?: ParserConfig) {
+        this.config = Object.assign(new ParserConfig(), config);
+        this.applyConfig();
+    }
+
+    private applyConfig() {
+
+        if (!this.config.classes) {
+            this.typesToProcess = this.typesToProcess.filter(item => item !== 'CLASS');
+            this.config.constructors = false;
+            this.config.methods = false;
+            this.config.interfaces = false;
+        }
+
+        if (!this.config.constructors) {
+            this.typesToProcess = this.typesToProcess.filter(item => item !== 'CONSTRUCTOR');
+        }
+
+        if (!this.config.methods) {
+            this.typesToProcess = this.typesToProcess.filter(item => item !== 'METHOD');
+        }
+
+        if (!this.config.interfaces) {
+            this.typesToProcess = this.typesToProcess.filter(item => item !== 'INTERFACE');
+        }
+
+        if (!this.config.invokes) {
+            this.typesToProcess = this.typesToProcess.filter(item => item !== 'INVOKE');
+        }
+
+        if (!this.config.news) {
+            this.typesToProcess = this.typesToProcess.filter(item => item !== 'NEW');
+        }
+
+        if (!this.config.procedures) {
+            this.typesToProcess = this.typesToProcess.filter(item => item !== 'PROCEDURE');
+            this.typesToProcess = this.typesToProcess.filter(item => item !== 'PRIVATE-PROCEDURE');
+        }
+
+        if (!this.config.runs) {
+            this.typesToProcess = this.typesToProcess.filter(item => item !== 'RUN');
+        }
+    }
+
+    private includeType(type: string): boolean {
+        return (this.typesToProcess.indexOf(type) >= 0);
+    }
 
     parseDir(dirname: string, sourcebasedir?: string): XrefFile[] {
 
@@ -56,6 +110,11 @@ export class Parser {
             this.processCrud(xrefline, xreffile);
         }
         else {
+
+            if (this.typesToProcess.indexOf(xrefline.type) < 0) {
+                return;
+            }
+
             switch (xrefline.type) {
                 case 'ANNOTATION':
                     this.processAnnotation(xrefline, xreffile);
@@ -260,7 +319,6 @@ export class Parser {
     private processConstructor(xrefline: XrefLine, xreffile: XrefFile) {
 
         const method = this.extractMethod(xrefline, true);
-        console.error(method);
         const constructor: Constructor = {
             accessor: method.accessor,
             static: method.static,
@@ -391,5 +449,28 @@ export class Parser {
         }
 
         return classes;
+    }
+}
+
+export class ParserConfig {
+
+    classes?: boolean;
+    methods?: boolean;
+    constructors?: boolean;
+    invokes?: boolean;
+    interfaces?: boolean;
+    news?: boolean;          // instatiates
+    procedures?: boolean;
+    runs?: boolean;
+
+    constructor() {
+        this.classes = true;
+        this.methods = true;
+        this.constructors = true;
+        this.invokes = true;
+        this.interfaces = true;
+        this.news = true;          // instatiates
+        this.procedures = true;
+        this.runs = true;
     }
 }
