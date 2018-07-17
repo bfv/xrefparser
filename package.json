@@ -4,7 +4,9 @@
   "description": "OpenEdge XREF parser",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register lib/**/*.spec.ts"
+    "test": "mocha -r ts-node/register lib/**/*.spec.ts",
+    "deploy": "tsc && npm run test && deploy.sh",
+    "tst": "echo --"
   },
   "repository": {
     "type": "git",
