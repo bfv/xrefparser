@@ -7,7 +7,9 @@
     "test": "mocha -r ts-node/register lib/**/*.spec.ts",
     "compile": "tsc && npm run test",
     "todist": "deploy.sh",
-    "publish": "npm run compile && npm version -- && npm run todist && npm publish dist"
+    "publish_patch": "npm run compile && npm version patch && npm run todist && npm publish dist",
+    "publish_minor": "npm run compile && npm version minor && npm run todist && npm publish dist",
+    "publish_major": "npm run compile && npm version major && npm run todist && npm publish dist"
   },
   "repository": {
     "type": "git",
