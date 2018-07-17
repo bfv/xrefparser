@@ -1,6 +1,12 @@
 # Release notes XREFPARSER
 For details see: https://github.com/bfv/xrefparser
 
+# 2.2.1
+- sync release notes and version
+
+# 2.2.0
+- test publish minor version
+
 # 2.1.1
 - test release for automated deployment
 - setup unit testing
