@@ -1,6 +1,6 @@
 {
   "name": "xrefparser",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "OpenEdge XREF parser",
   "main": "index.js",
   "scripts": {
