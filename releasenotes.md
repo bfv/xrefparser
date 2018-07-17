@@ -1,6 +1,10 @@
 # Release notes XREFPARSER
 For details see: https://github.com/bfv/xrefparser
 
+# 2.1.1
+- test release for automated deployment
+- setup unit testing
+
 ## 2.1.0
 - Configurable Parser via ParserConfig class
 

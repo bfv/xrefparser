@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha -r ts-node/register lib/**/*.spec.ts",
-    "todist": "tsc && npm run test && deploy.sh",
-    "publish": "npm version -- && npm run todist && npm publish"
+    "compile": "tsc && npm run test",
+    "todist": "deploy.sh",
+    "publish": "npm run compile && npm version -- && npm run todist && npm publish"
   },
   "repository": {
     "type": "git",
