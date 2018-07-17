@@ -1,0 +1,11 @@
+C:\devoe\xrefbaseline\src\include\code1.p C:\devoe\xrefbaseline\src\include\code1.p 1 COMPILE C:\devoe\xrefbaseline\src/include\code1.p
+C:\devoe\xrefbaseline\src\include\code1.p C:\devoe\xrefbaseline\src\include\code1.p 1 CPINTERNAL UTF-8
+C:\devoe\xrefbaseline\src\include\code1.p C:\devoe\xrefbaseline\src\include\code1.p 1 CPSTREAM UTF-8
+C:\devoe\xrefbaseline\src\include\code1.p C:\devoe\xrefbaseline\src\include\code1.p 2 INCLUDE include/code1.i
+C:\devoe\xrefbaseline\src\include\code1.p C:\devoe\xrefbaseline\src\include\code1.i 2 INCLUDE include/code2.i
+C:\devoe\xrefbaseline\src\include\code1.i C:\devoe\xrefbaseline\src\include\code2.i 2 STRING "Order" 5 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\include\code1.i C:\devoe\xrefbaseline\src\include\code2.i 2 ACCESS sports2000.Order Ordernum 
+C:\devoe\xrefbaseline\src\include\code1.i C:\devoe\xrefbaseline\src\include\code2.i 2 SEARCH sports2000.Order OrderNum
+C:\devoe\xrefbaseline\src\include\code1.p C:\devoe\xrefbaseline\src\include\code1.i 4 STRING "Customer" 8 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\include\code1.p C:\devoe\xrefbaseline\src\include\code1.i 4 ACCESS sports2000.Customer CustNum 
+C:\devoe\xrefbaseline\src\include\code1.p C:\devoe\xrefbaseline\src\include\code1.i 4 SEARCH sports2000.Customer CustNum

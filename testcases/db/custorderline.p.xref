@@ -1,0 +1,21 @@
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 1 COMPILE C:\devoe\xrefbaseline\src/db\custorderline.p
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 1 CPINTERNAL UTF-8
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 1 CPSTREAM UTF-8
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 2 STRING "ttsports" 8 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 2 STRING "name" 4 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 2 STRING "ordernum" 8 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 2 STRING "itemnum" 7 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 8 STRING "Customer" 8 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 8 SEARCH sports2000.Customer CustNum WHOLE-INDEX
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 8 STRING "Order" 5 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 8 ACCESS sports2000.Order CustNum 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 8 ACCESS sports2000.Customer CustNum 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 8 SEARCH sports2000.Order CustOrder
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 8 STRING "OrderLine" 9 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 8 ACCESS sports2000.OrderLine Ordernum 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 8 ACCESS sports2000.Order Ordernum 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 8 SEARCH sports2000.OrderLine orderline
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 13 ACCESS sports2000.Customer Name 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 13 ACCESS sports2000.Order Ordernum 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 13 ACCESS sports2000.OrderLine Itemnum 
+C:\devoe\xrefbaseline\src\db\custorderline.p C:\devoe\xrefbaseline\src\db\custorderline.p 19 STRING "default" 7 NONE UNTRANSLATABLE 

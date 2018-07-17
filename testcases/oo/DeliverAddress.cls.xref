@@ -1,0 +1,35 @@
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 1 COMPILE C:\devoe\xrefbaseline\src/oo\DeliverAddress.cls
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 1 CPINTERNAL UTF-8
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 1 CPSTREAM UTF-8
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 14 BLOCK-LEVEL ON ERROR UNDO, THROW
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 16 CLASS oo.DeliverAddress,INHERITS oo.Address oo.AddressBase,,,FINAL,,
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 16 STRING "oo.DeliverAddress" 17 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 16 STRING "oo.AddressBase" 14 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 16 STRING "oo.Address" 10 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 18 STRING "Floor" 5 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 18 PROPERTY PUBLIC,,,,,Floor
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 19 STRING "tttest" 6 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 19 STRING "itest" 5 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 19 STRING "ctest" 5 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 26 CONSTRUCTOR PUBLIC,,,,DeliverAddress,void,
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 26 STRING "DELIVERADDRESS" 14 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 28 STRING "address" 7 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 30 CONSTRUCTOR PUBLIC,,,,DeliverAddress,void,INPUT address OO.ADDRESS
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 30 STRING "DELIVERADDRESS" 14 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 33 STRING "cIn" 3 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 33 STRING "iIn" 3 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 33 STRING "cOut" 4 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 33 STRING "testIO" 6 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 36 METHOD PUBLIC,,,FINAL,,MultipleParameters,character,INPUT cIn CHARACTER,INPUT iIn INTEGER,OUTPUT cOut OO.ADDRESS,INPUT-OUTPUT testIO CHARACTER
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 36 STRING "MULTIPLEPARAMETERS" 18 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 38 STRING "tttest" 6 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 38 STRING "b-tttest" 8 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 38 STRING "b-tttest" 8 LEFT TRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 40 METHOD PUBLIC,,,,,BufferParameter,void,BUFFER b-tttest tttest
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 40 STRING "BUFFERPARAMETER" 15 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 44 METHOD PROTECTED,,,,,TableParameter,void,OUTPUT tttest TABLE
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 44 STRING "TABLEPARAMETER" 14 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 46 STRING "itest" 5 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls IMPLICIT INVOKE oo.Address:Address
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls IMPLICIT INVOKE oo.Address:Address
+C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls C:\devoe\xrefbaseline\src\oo\DeliverAddress.cls 34 NEW oo.Address

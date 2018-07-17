@@ -1,0 +1,8 @@
+C:\devoe\xrefbaseline\src\oo\IBase.cls C:\devoe\xrefbaseline\src\oo\IBase.cls 1 COMPILE C:\devoe\xrefbaseline\src/oo\IBase.cls
+C:\devoe\xrefbaseline\src\oo\IBase.cls C:\devoe\xrefbaseline\src\oo\IBase.cls 1 CPINTERNAL UTF-8
+C:\devoe\xrefbaseline\src\oo\IBase.cls C:\devoe\xrefbaseline\src\oo\IBase.cls 1 CPSTREAM UTF-8
+C:\devoe\xrefbaseline\src\oo\IBase.cls C:\devoe\xrefbaseline\src\oo\IBase.cls 14 INTERFACE oo.IBase,,,,
+C:\devoe\xrefbaseline\src\oo\IBase.cls C:\devoe\xrefbaseline\src\oo\IBase.cls 14 STRING "oo.IBase" 8 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\IBase.cls C:\devoe\xrefbaseline\src\oo\IBase.cls 16 STRING "name" 4 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\IBase.cls C:\devoe\xrefbaseline\src\oo\IBase.cls 16 METHOD PUBLIC,,,,,Identify,character,INPUT name CHARACTER
+C:\devoe\xrefbaseline\src\oo\IBase.cls C:\devoe\xrefbaseline\src\oo\IBase.cls 16 STRING "IDENTIFY" 8 NONE UNTRANSLATABLE 

@@ -1,0 +1,8 @@
+C:\devoe\xrefbaseline\src\oo\IDisposable.cls C:\devoe\xrefbaseline\src\oo\IDisposable.cls 1 COMPILE C:\devoe\xrefbaseline\src/oo\IDisposable.cls
+C:\devoe\xrefbaseline\src\oo\IDisposable.cls C:\devoe\xrefbaseline\src\oo\IDisposable.cls 1 CPINTERNAL UTF-8
+C:\devoe\xrefbaseline\src\oo\IDisposable.cls C:\devoe\xrefbaseline\src\oo\IDisposable.cls 1 CPSTREAM UTF-8
+C:\devoe\xrefbaseline\src\oo\IDisposable.cls C:\devoe\xrefbaseline\src\oo\IDisposable.cls 15 INTERFACE oo.IDisposable,INHERITS oo.IEmpty,,,
+C:\devoe\xrefbaseline\src\oo\IDisposable.cls C:\devoe\xrefbaseline\src\oo\IDisposable.cls 15 STRING "oo.IDisposable" 14 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\IDisposable.cls C:\devoe\xrefbaseline\src\oo\IDisposable.cls 15 STRING "oo.IEmpty" 9 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\oo\IDisposable.cls C:\devoe\xrefbaseline\src\oo\IDisposable.cls 17 METHOD PUBLIC,,,,,Dispose,void,
+C:\devoe\xrefbaseline\src\oo\IDisposable.cls C:\devoe\xrefbaseline\src\oo\IDisposable.cls 17 STRING "DISPOSE" 7 NONE UNTRANSLATABLE 
