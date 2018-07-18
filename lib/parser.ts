@@ -12,7 +12,7 @@ export class Parser {
     private typesToProcess = [
         'ANNOTATION', 'CLASS', 'COMPILE', 'CONSTRUCTOR', 'CPINTERNAL', 'CPSTREAM',
         'INCLUDE', 'INTERFACE', 'INVOKE', 'METHOD', 'NEW', 'PROCEDURE',
-        'PRIVATE-PROCEDURE', 'RUN'
+        'PRIVATE-PROCEDURE', 'RUN', 'SEARCH'
     ];
 
     constructor(config?: ParserConfig) {
@@ -157,6 +157,9 @@ export class Parser {
                     break;
                 case 'RUN':
                     this.processRun(xrefline, xreffile);
+                    break;
+                case 'SEARCH':
+                    this.processSearch(xrefline, xreffile);
                     break;
             }
         }
@@ -304,6 +307,29 @@ export class Parser {
             xreffile.runs.push(runObject);
         }
 
+    }
+
+    private processSearch(xrefline: XrefLine, xreffile: XrefFile) {
+
+        const searchInfo = xrefline.info.split(' ');
+
+        // for now this method is used just for fetching references to temp-tables
+        if (searchInfo.indexOf('TEMPTABLE') === -1) {
+            return;
+        }
+
+        let ttname = '';
+        if (searchInfo[0] === 'DATA-MEMBER') {
+            // it's inside a class
+            ttname = searchInfo[1].split(':')[1];
+        }
+        else {
+            ttname = searchInfo[0];
+        }
+
+        if (xreffile.ttnames.filter(tt => tt.toLowerCase() === ttname.toLowerCase())[0] === undefined) {
+            xreffile.ttnames.push(ttname);
+        }
     }
 
     private processMethod(xrefline: XrefLine, xreffile: XrefFile) {

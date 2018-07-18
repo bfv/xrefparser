@@ -8,6 +8,7 @@ const testcaseDir = __dirname + path.sep + '..' + path.sep + 'testcases' + path.
 const helloDir = testcaseDir + path.sep + 'hello' + path.sep;
 const ooDir = testcaseDir + path.sep + 'oo' + path.sep;
 const dbDir = testcaseDir + path.sep + 'db' + path.sep;
+const ttDir = testcaseDir + path.sep + 'tt' + path.sep;
 
 describe('Parser class', () => {
 
@@ -75,6 +76,30 @@ describe('ParseFile database tables', () => {
 });
 
 describe('ParseFile temp-tables', () => {
+
+    const parser = new Parser();
+    const xreffile = parser.parseFile(ttDir + 'updatettfield.p.xref');
+
+    it('updatettfield.p should have 1 ttnames entry', () => {
+        expect(xreffile.ttnames.length).to.be.equal(1);
+    });
+
+    it('updatettfield.p contains ttsports tablenames entry', () => {
+        const ttnameIndex = xreffile.ttnames.indexOf('ttsports');
+        expect(ttnameIndex).to.be.gt(-1);
+    });
+
+    const xreffile2 = parser.parseFile(ttDir + 'TTTestClass.cls.xref');
+    it('TTTestClass.cls contains ttsports tablenames entry', () => {
+        const ttnameIndex = xreffile2.ttnames.indexOf('tttest');
+        expect(ttnameIndex).to.be.gt(-1);
+    });
+
+    const xreffile3 = parser.parseFile(ttDir + 'mixedttdb.p.xref');
+    it('mixedttdb.p contains ttsports tablenames entry', () => {
+        const ttnameIndex = xreffile3.ttnames.indexOf('ttsports');
+        expect(ttnameIndex).to.be.gt(-1);
+    });
 
 });
 

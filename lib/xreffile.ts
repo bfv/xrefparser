@@ -1,5 +1,6 @@
 
 import { Table, Field, Class, MethodInvocation, Procedure, Run, Method, Constructor, Interface } from './model';
+import { TempTable, TempTableField } from './model';
 
 export class XrefFile {
 
@@ -11,12 +12,14 @@ export class XrefFile {
     cpStream = '';
     includes: string[] = [];
     tablenames: string[] = [];
+    ttnames: string[] = [];
     instantiates: string[] = [];
     invokes: MethodInvocation[] = [];
     annotations: string[] = [];
     procedures: Procedure[] = [];
     runs: Run[] = [];
     tables: Table[] = [];
+    temptables: TempTable[] = [];
 
     constructor(file: string) {
         this.xreffile = file;

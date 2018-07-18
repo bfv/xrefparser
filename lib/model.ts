@@ -113,3 +113,12 @@ export class Interface {
     inherits: string[] = [];
     methods: Method[] = [];
 }
+
+export class TempTable {
+    name = '';
+    fields: TempTableField[] = [];
+}
+
+export class TempTableField {
+    name = '';
+}
