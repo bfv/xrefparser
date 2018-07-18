@@ -72,7 +72,7 @@ export class Parser {
             this.readFiles(dirname, []).forEach(file => {
 
                 if (path.extname(file) === '.xref') {
-                    const xreffile = this.parseFile(file, sourcebasedir);
+                    const xreffile = this.parseFile(file, dirname, sourcebasedir);
                     parsed.push(xreffile);
                 }
             });
@@ -83,9 +83,11 @@ export class Parser {
         return parsed;
     }
 
-    parseFile(file: string, sourcebasedir?: string): XrefFile {
+    // private again because parsing a single file will result in incorrect class names (constructor & methods)
+    // only via parseDir and the subsequent postProcess the class names of parameters will be correct
+    private parseFile(file: string, xrefbasedir: string, sourcebasedir?: string): XrefFile {
 
-        const xreffile = new XrefFile(file);
+        const xreffile = new XrefFile(file, xrefbasedir);
 
         const lines = fs.readFileSync(file).toString().split('\n');
         lines.forEach(line => {

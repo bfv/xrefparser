@@ -1,6 +1,8 @@
 
 import { Table, Field, Class, MethodInvocation, Procedure, Run, Method, Constructor, Interface } from './model';
 import { TempTable, TempTableField } from './model';
+import { normalize } from 'path';
+import { replaceAll } from './util';
 
 export class XrefFile {
 
@@ -21,8 +23,8 @@ export class XrefFile {
     tables: Table[] = [];
     temptables: TempTable[] = [];
 
-    constructor(file: string) {
-        this.xreffile = file;
+    constructor(file: string, xrefbasedir: string) {
+        this.xreffile = this.normalize(file, xrefbasedir);
     }
 
     setSourceFile(sourcefile: string) {
@@ -70,6 +72,15 @@ export class XrefFile {
         this.includes.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
         this.invokes.sort((a, b) => a.class.toLowerCase() < b.class.toLowerCase() ? -1 : 1);
         this.tablenames.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
+    }
+
+    normalize(file: string, dir: string): string {
+        file = replaceAll(file, '\\', '/');
+        file = replaceAll(file, '//', '/');
+        dir = replaceAll(dir, '\\', '/');
+        dir = replaceAll(dir, '//', '/');
+        file = file.replace(dir, '');
+        return file;
     }
 }
 
