@@ -65,9 +65,9 @@ getFieldReferences(fieldname: string, tablename?: string, hasUpdates?: boolean):
 Looks for occurences of `fieldname`, optionally in table `tablename`. The optional `hasUpdates` parameter gives the possibility the search for sources which update a certain field (or not). If `tablename` or `hasUpdates` are not to be taken into consideration, omit them or pass `undefined`.
 
 
-### getTabelReferences
+### getTableReferences
 ```
-getTabelReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): Xreffile[]
+getTableReferences(tablename: string, hasCreates?: boolean, hasUpdates?: boolean, hasDeletes?: boolean): Xreffile[]
 ```
 
 Looks for uses of `tablename` in the all the `Xreffile` objects and returns `XrefFile[]`. Use `map` as in the example to turn it into an array of source names (or whatever you want). If for the `has*` parameters `undefined` is used, the particular action is not searched for. This contrary to `hasCreated = false` where sources are returned that do *not* create the particular table.
