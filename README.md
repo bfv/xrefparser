@@ -15,7 +15,7 @@ const xrefdata = parser.parseDir('c:/usr/xref', 'D:\\wintmp\\build492943069\\dev
 const searcher = new Searcher(xrefdata);
 
 const sources = searcher
-                .getTabelReferences('Klantbes', true, undefined, true)
+                .getTableReferences('Klantbes', true, undefined, true)
                 .map(table => table.sourcefile);
 
 console.log(sources);
