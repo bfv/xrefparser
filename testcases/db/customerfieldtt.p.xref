@@ -1,0 +1,7 @@
+C:\devoe\xrefbaseline\src\db\customerfieldtt.p C:\devoe\xrefbaseline\src\db\customerfieldtt.p 1 COMPILE C:\devoe\xrefbaseline\src\db\customerfieldtt.p
+C:\devoe\xrefbaseline\src\db\customerfieldtt.p C:\devoe\xrefbaseline\src\db\customerfieldtt.p 1 CPINTERNAL UTF-8
+C:\devoe\xrefbaseline\src\db\customerfieldtt.p C:\devoe\xrefbaseline\src\db\customerfieldtt.p 1 CPSTREAM UTF-8
+C:\devoe\xrefbaseline\src\db\customerfieldtt.p C:\devoe\xrefbaseline\src\db\customerfieldtt.p 1 STRING "ttcustomer" 10 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\db\customerfieldtt.p C:\devoe\xrefbaseline\src\db\customerfieldtt.p 1 STRING "custnum" 7 NONE UNTRANSLATABLE 
+C:\devoe\xrefbaseline\src\db\customerfieldtt.p C:\devoe\xrefbaseline\src\db\customerfieldtt.p 1 REFERENCE sports2000.Customer CustNum 
+C:\devoe\xrefbaseline\src\db\customerfieldtt.p C:\devoe\xrefbaseline\src\db\customerfieldtt.p 1 STRING "default" 7 NONE UNTRANSLATABLE 

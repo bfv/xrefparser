@@ -72,6 +72,18 @@ describe('ParseFile database tables', () => {
         expect(tableNameIndex).to.be.greaterThan(-1);
     });
 
+    const xreffile3 = getXrefFile('db/customerfieldtt.p.xref');
+    it('customerfieldtt.p contains 1 tablename and 1 field reference', () => {
+        expect(xreffile3.tablenames.length).to.be.equal(1);
+        expect(xreffile3.tables[0].fields.length).to.be.equal(1);
+    });
+
+    const xreffile4 = getXrefFile('db/customertt.p.xref');
+    it('customerfieldtt.p contains 1 tablename and no field reference', () => {
+        expect(xreffile4.tablenames.length).to.be.equal(1);
+        expect(xreffile4.tables[0].fields.length).to.be.equal(0);
+    });
+
 });
 
 describe('ParseFile temp-tables', () => {
