@@ -42,6 +42,7 @@ dist/
 doc/
 tmp/
 .vscode/
+.idea/
 
 deploy.cmd
 lib/testlocal.ts
