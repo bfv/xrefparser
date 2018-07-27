@@ -212,7 +212,6 @@ describe('ParseFile class constructors', () => {
 
 describe('Process REFERENCE xref lines for field w/o ACCESS  ', () => {
     const xreffile = getXrefFile('db/test_reference_only.p.xref');
-    fs.writeFileSync('c:/tmp/test_reference_only.json', JSON.stringify(xreffile));
 
     it('There should be 1 entry in tablenames', () => {
         expect(xreffile.tablenames.length).to.be.equal(1);
@@ -242,7 +241,6 @@ describe('Process REFERENCE xref lines for field w/o ACCESS  ', () => {
 
 describe('Process REFERENCE tt like table', () => {
     const xreffile = getXrefFile('db/test_like.p.xref');
-    fs.writeFileSync('c:/tmp/test_like.json', JSON.stringify(xreffile));
 
     it('There should be 1 entry in tablenames', () => {
         expect(xreffile.tablenames.length).to.be.equal(1);
