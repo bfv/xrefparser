@@ -8,7 +8,7 @@ export class Parser {
 
     private config: ParserConfig;
     private crudIgnore = ['PUBLIC-DATA-MEMBER', 'PUBLIC-PROPERTY', 'SHARED', 'DATA-MEMBER'];
-    private crudTypes = ['ACCESS', 'UPDATE', 'CREATE', 'DELETE'];
+    private crudTypes = ['ACCESS', 'UPDATE', 'CREATE', 'DELETE', 'REFERENCE'];
     private typesToProcess = [
         'ANNOTATION', 'CLASS', 'COMPILE', 'CONSTRUCTOR', 'CPINTERNAL', 'CPSTREAM',
         'INCLUDE', 'INTERFACE', 'INVOKE', 'METHOD', 'NEW', 'PROCEDURE',
@@ -247,12 +247,14 @@ export class Parser {
             return;
         }
 
-        if (xrefline.type === 'ACCESS' || xrefline.type === 'UPDATE') {
+        if (xrefline.type === 'ACCESS' || xrefline.type === 'UPDATE' || xrefline.type === 'REFERENCE') {
 
             const tableinfo = tablepart[0].split('.');
             if (tableinfo[1] !== undefined) {
                 const table = xreffile.addTable(tableinfo[1], tableinfo[0], false, false, xrefline.type === 'UPDATE');
-                xreffile.addField(tablepart[1], table, xrefline.type === 'UPDATE');
+                if (tablepart[1]) {
+                    xreffile.addField(tablepart[1], table, xrefline.type === 'UPDATE');
+                }
             }
         }
         else if (xrefline.type === 'CREATE' || xrefline.type === 'DELETE') {

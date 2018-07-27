@@ -3,6 +3,7 @@ import { XrefFile } from './xreffile';
 import { expect, should } from 'chai';
 import 'mocha';
 import * as path from 'path';
+import * as fs from 'fs';
 
 const testcaseDir = __dirname + path.sep + '..' + path.sep + 'testcases' + path.sep;
 const helloDir = testcaseDir + path.sep + 'hello' + path.sep;
@@ -207,6 +208,57 @@ describe('ParseFile class constructors', () => {
         }
     });
 
+});
+
+describe('Process REFERENCE xref lines for field w/o ACCESS  ', () => {
+    const xreffile = getXrefFile('db/test_reference_only.p.xref');
+    fs.writeFileSync('c:/tmp/test_reference_only.json', JSON.stringify(xreffile));
+
+    it('There should be 1 entry in tablenames', () => {
+        expect(xreffile.tablenames.length).to.be.equal(1);
+    });
+
+    it('Referenced table should in tablenames', () => {
+        expect(xreffile.tablenames[0].toLowerCase()).to.be.equal('customer');
+    });
+
+    it('Referenced table should in tables', () => {
+        expect(xreffile.tables[0].name.toLowerCase()).to.be.equal('customer');
+    });
+
+    it('Referenced field should be in fields array', () => {
+        expect(xreffile.tables[0].fields[0].name.toLowerCase()).to.be.equal('custnum');
+    });
+
+    it('It should have only 1 field', () => {
+        expect(xreffile.tables[0].fields.length).to.be.equal(1);
+    });
+
+    it('Referenced field should have isUpdated == false', () => {
+        expect(xreffile.tables[0].fields[0].isUpdated).to.be.equal(false);
+    });
+
+});
+
+describe('Process REFERENCE tt like table', () => {
+    const xreffile = getXrefFile('db/test_like.p.xref');
+    fs.writeFileSync('c:/tmp/test_like.json', JSON.stringify(xreffile));
+
+    it('There should be 1 entry in tablenames', () => {
+        expect(xreffile.tablenames.length).to.be.equal(1);
+    });
+
+    it('Referenced table should in tablenames', () => {
+        expect(xreffile.tablenames[0].toLowerCase()).to.be.equal('customer');
+    });
+
+    it('Referenced table should in tables', () => {
+        expect(xreffile.tables[0].name.toLowerCase()).to.be.equal('customer');
+    });
+
+    it('It should not have fields', () => {
+        expect(xreffile.tables[0].fields.length).to.be.equal(0);
+    });
 });
 
 function getXrefFile(name: string): XrefFile {
