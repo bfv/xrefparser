@@ -1,6 +1,10 @@
 # Release notes XREFPARSER
 For details see: https://github.com/bfv/xrefparser
 
+# 3.0.2
+- doc release
+- added reference to release notes to README.md
+
 # 3.0.1
 - fixed deploy bug
 

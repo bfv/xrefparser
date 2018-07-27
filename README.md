@@ -76,10 +76,8 @@ Looks for uses of `tablename` in the all the `Xreffile` objects and returns `Xre
 Above case takes on a Dell XPS15 9560 around 8s to parse all the xref files and 3ms to search for create/delete references in the 'Klantbes' table.
 There are around 3850 xref files which are combined 350MB on disk.
 
-## Assumptions
-This being an early version of this package there are a few assumptions:
-- xref files have a .xref extension
-- the root directory of all the xref files is called `xref`
+## Release notes
+The release notes can be found at [github/releasenotes.md](https://github.com/bfv/xrefparser/blob/master/releasenotes.md)
 
 ## Example `Xreffile`
 The `Parser` turns in the `.xref` files into an array of `Xreffile` objects. Beneath an example which is pretty self explanatory:
