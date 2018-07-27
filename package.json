@@ -1,13 +1,13 @@
 {
   "name": "xrefparser",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "OpenEdge XREF parser",
   "main": "index.js",
   "scripts": {
     "test": "mocha -r ts-node/register lib/**/*.spec.ts",
     "compile": "tsc && npm run test",
     "todist": "cp .npmignore package.json README.md releasenotes.md dist",
-    "publish": "npm run compile && npm run todist && npm publish dist"
+    "publishthis": "npm run compile && npm run todist && npm publish dist"
   },
   "repository": {
     "type": "git",

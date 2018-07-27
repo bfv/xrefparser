@@ -1,6 +1,9 @@
 # Release notes XREFPARSER
 For details see: https://github.com/bfv/xrefparser
 
+# 3.0.1
+- fixed deploy bug
+
 # 3.0.0
 - implemented various unit tests
 - Parser.parseFile is private (again)
