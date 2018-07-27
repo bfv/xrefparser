@@ -205,7 +205,8 @@ describe('Parser class', () => {
         it('DeliverAddress constructor class parameters correct case', () => {
             if (xreffile.class) {
                 const classRef = xreffile.class;
-                const statics = classRef.constructors.filter(element => element.signature[0] && element.signature[0].datatype === 'oo.Address');
+                const statics = classRef.constructors
+                    .filter(element => element.signature[0] && element.signature[0].datatype === 'oo.Address');
                 expect(statics.length).to.be.equal(1);
             }
         });
