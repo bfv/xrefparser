@@ -108,6 +108,19 @@ export class Searcher {
         return references;
     }
 
+    getImplementations(interfaceName: string): XrefFile[] {
+        const references: XrefFile[] = [];
+
+        this.info.forEach(xreffile => {
+            if (xreffile.class) {
+                if (xreffile.class.implements.indexOf(interfaceName) >= 0) {
+                    references.push(xreffile);
+                }
+            }
+        });
+        return references;
+    }
+
     add(xreffiles: XrefFile[]) {
 
         xreffiles.forEach(xreffile => {
