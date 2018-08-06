@@ -1,6 +1,9 @@
 # Release notes XREFPARSER
 For details see: https://github.com/bfv/xrefparser
 
+# 3.0.3
+- #15, sequences are no longer reported on as tables
+
 # 3.0.2
 - doc release
 - added reference to release notes to README.md
