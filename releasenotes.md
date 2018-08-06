@@ -1,6 +1,9 @@
 # Release notes XREFPARSER
 For details see: https://github.com/bfv/xrefparser
 
+# 3.0.4
+- fixed npm deploy bug
+
 # 3.0.3
 - #15, sequences are no longer reported on as tables
 
