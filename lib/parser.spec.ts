@@ -6,14 +6,10 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 const testcaseDir = __dirname + path.sep + '..' + path.sep + 'testcases' + path.sep;
-const helloDir = testcaseDir + path.sep + 'hello' + path.sep;
-const ooDir = testcaseDir + path.sep + 'oo' + path.sep;
-const dbDir = testcaseDir + path.sep + 'db' + path.sep;
-const ttDir = testcaseDir + path.sep + 'tt' + path.sep;
+const sourcedir = __dirname.replace('\\', '/') + '/';
 
 const parser = new Parser();
-const xreffiles = parser.parseDir(testcaseDir, 'C:/dev/node/xrefparser/4gl/');
-// console.error(JSON.stringify(xreffiles, undefined, 2));
+const xreffiles = parser.parseDir(testcaseDir, sourcedir);
 
 describe('Parser class', () => {
 
@@ -26,7 +22,7 @@ describe('Parser class', () => {
 
         it('Test cases directory should return correct amount of cases', () => {
             const result = parser.parseDir(testcaseDir);
-            expect(result).to.have.lengthOf(36);
+            expect(result).to.have.lengthOf(37);
         });
     });
 
@@ -262,9 +258,17 @@ describe('Parser class', () => {
         });
     });
 
+    describe('Sequences', () => {
+
+        const xreffile = getXrefFile('db/sequence.p.xref');
+
+        it('Not report sequence as table', () => {
+            expect(xreffile.tablenames[0]).to.be.undefined;
+        });
+    });
+
 });
 
 function getXrefFile(name: string): XrefFile {
     return xreffiles.filter(item => item.xreffile === name)[0];
 }
-

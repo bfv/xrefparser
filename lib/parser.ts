@@ -109,7 +109,9 @@ export class Parser {
     private processXrefLine(xrefline: XrefLine, xreffile: XrefFile) {
 
         if (this.crudTypes.indexOf(xrefline.type) >= 0) {
-            this.processCrud(xrefline, xreffile);
+            if (xrefline.info.split(' ')[1] !== 'SEQUENCE') {
+                this.processCrud(xrefline, xreffile);
+            }
         }
         else {
 
