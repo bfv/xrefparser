@@ -22,7 +22,7 @@ describe('Parser class', () => {
 
         it('Test cases directory should return correct amount of cases', () => {
             const result = parser.parseDir(testcaseDir);
-            expect(result).to.have.lengthOf(37);
+            expect(result).to.have.lengthOf(38);
         });
     });
 
@@ -256,6 +256,32 @@ describe('Parser class', () => {
         it('It should not have fields', () => {
             expect(xreffile.tables[0].fields.length).to.be.equal(0);
         });
+    });
+
+    describe('Includes', () => {
+        const xreffile = getXrefFile('include/code1.p.xref');
+
+        it('There should be 2 includes in code1.p', () => {
+            expect(xreffile.includes.length).to.be.equal(2);
+        });
+
+        const xreffile2 = getXrefFile('include/includes.p.xref');
+        it('nested includes should be reported on', () => {
+            let include = xreffile2.includes.filter(element => element === 'include/ttparent.i');
+            expect(include.length).to.be.equal(1);
+        });
+
+        const xreffile3 = getXrefFile('include/includes-params.p.xref');
+        it('nested includes should be reported on', () => {
+            let include = xreffile2.includes.filter(element => element === 'include/ttparent.i');
+            expect(include.length).to.be.equal(1);
+        });
+
+        it('nested includes parameters with should be reported on', () => {
+            let include = xreffile2.includes.filter(element => element === 'include/ttchild.i');
+            expect(include.length).to.be.equal(1);
+        });
+
     });
 
     describe('Sequences', () => {
