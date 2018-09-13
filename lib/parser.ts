@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { XrefLine, Class, Accessor, Method, Parameter, ParameterMode, Constructor, Interface } from './model';
 import { XrefFile } from './xreffile';
+import { replaceAll } from '../dist/util';
 
 export class Parser {
 
@@ -229,12 +230,16 @@ export class Parser {
 
     private processInclude(xrefline: XrefLine, xreffile: XrefFile) {
 
-        if (xrefline.info.startsWith('\"')) {
-            return;
+        // if (xrefline.info.startsWith('\"')) {
+        //     return;
+        // }
+        let includeFile = replaceAll(xrefline.info, '\"', '');
+        if (includeFile.indexOf(' ')) {
+            includeFile = includeFile.split(' ')[0];
         }
 
-        if (xreffile.includes.indexOf(xrefline.info)) {
-            xreffile.includes.push(xrefline.info);
+        if (xreffile.includes.indexOf(includeFile) === -1) {
+            xreffile.includes.push(includeFile);
         }
     }
 
