@@ -13,7 +13,7 @@ const parser = new Parser();
 const xreffiles = parser.parseDir(testcaseDir, 'C:/dev/node/xrefparser/4gl/');
 
 describe('Searcher class', () => {
-    describe('Return correct implementors', () => {
+    describe('Return correct interface implementors', () => {
 
         const searcher = new Searcher(xreffiles);
 
