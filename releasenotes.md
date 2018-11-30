@@ -1,6 +1,9 @@
 # Release notes XREFPARSER
 For details see: https://github.com/bfv/xrefparser
 
+# 3.1.0
+- added getIncludeReferences + plus related tests
+
 # 3.0.4
 - fixed npm deploy bug
 
