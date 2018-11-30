@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { XrefLine, Class, Accessor, Method, Parameter, ParameterMode, Constructor, Interface } from './model';
 import { XrefFile } from './xreffile';
-import { replaceAll } from '../dist/util';
+import { replaceAll } from './util';
 
 export class Parser {
 

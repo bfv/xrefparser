@@ -5,11 +5,11 @@ import { ENGINE_METHOD_NONE } from 'constants';
 
 export class Searcher {
 
-    private info: XrefFile[] = [];
+    private xreffiles: XrefFile[] = [];
 
-    constructor(info?: XrefFile[]) {
-        if (info !== undefined) {
-            this.info = info;
+    constructor(xreffiles?: XrefFile[]) {
+        if (xreffiles !== undefined) {
+            this.xreffiles = xreffiles;
         }
     }
 
@@ -17,7 +17,7 @@ export class Searcher {
 
         const dbnames: string[] = [];
 
-        this.info
+        this.xreffiles
             .filter(xreffile => sources === undefined || (sources.findIndex(source => source === xreffile.sourcefile) >= 0))
             .forEach(item => {
                 item.tables.forEach(table => {
@@ -32,7 +32,7 @@ export class Searcher {
 
         const tables: TableDefintion[] = [];
 
-        this.info
+        this.xreffiles
             .filter(xreffile => sources === undefined || (sources.findIndex(source => source === xreffile.sourcefile) >= 0))
             .forEach(item => {
                 item.tables.forEach(table => {
@@ -50,7 +50,7 @@ export class Searcher {
 
         const noCriteria = (hasCreates === undefined && hasUpdates === undefined && hasDeletes === undefined);
 
-        const result = this.info.filter(xreffile => {
+        const result = this.xreffiles.filter(xreffile => {
             const tmp = xreffile.tables.filter(table => table.name.toLowerCase() === tablename.toLowerCase() && (
                 (hasCreates !== undefined && table.isCreated === hasCreates) ||
                 (hasUpdates !== undefined && table.isUpdated === hasUpdates) ||
@@ -69,7 +69,7 @@ export class Searcher {
             xreffiles = this.getTableReferences(tablename);
         }
         else {
-            xreffiles = this.info;
+            xreffiles = this.xreffiles;
         }
 
         const noCriteria = (hasUpdates === undefined);
@@ -98,7 +98,7 @@ export class Searcher {
 
         const references: XrefFile[] = [];
 
-        this.info.forEach(xreffile => {
+        this.xreffiles.forEach(xreffile => {
             const tables = xreffile.tables.filter(table => table.database.toLowerCase() === databaseName.toLowerCase());
             if (tables.length > 0) {
                 references.push(xreffile);
@@ -111,7 +111,7 @@ export class Searcher {
     getImplementations(interfaceName: string): XrefFile[] {
         const references: XrefFile[] = [];
 
-        this.info.forEach(xreffile => {
+        this.xreffiles.forEach(xreffile => {
             if (xreffile.class) {
                 if (xreffile.class.implements.indexOf(interfaceName) >= 0) {
                     references.push(xreffile);
@@ -121,16 +121,20 @@ export class Searcher {
         return references;
     }
 
+    getIncludeReferences(includeName: string): XrefFile[] {
+        return this.xreffiles.filter(xreffile => xreffile.includes.indexOf(includeName) >= 0);
+    }
+
     add(xreffiles: XrefFile[]) {
 
         xreffiles.forEach(xreffile => {
-            const i = this.info.findIndex(item => item.sourcefile === xreffile.sourcefile);
+            const i = this.xreffiles.findIndex(item => item.sourcefile === xreffile.sourcefile);
 
             if (i === -1) {
-                this.info.push(xreffile);
+                this.xreffiles.push(xreffile);
             }
             else {
-                this.info[i] = xreffile;
+                this.xreffiles[i] = xreffile;
             }
         });
     }

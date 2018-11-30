@@ -151,7 +151,6 @@ describe('Parser class', () => {
         const xreffile = getXrefFile('oo/DeliverAddress.cls.xref');
 
         it('DeliverAddress has 4 constructors', () => {
-            // console.error(JSON.stringify(xreffile, undefined, 2));
             let classElementPresent = false;
             if (xreffile.class) {
                 classElementPresent = true;
