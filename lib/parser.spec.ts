@@ -271,8 +271,8 @@ describe('Parser class', () => {
         });
 
         const xreffile3 = getXrefFile('include/includes-params.p.xref');
-        it('nested includes should be reported on', () => {
-            let include = xreffile2.includes.filter(element => element === 'include/ttparent.i');
+        it('nested includes should be reported on (2)', () => {
+            let include = xreffile3.includes.filter(element => element === 'include/ttparent.i');
             expect(include.length).to.be.equal(1);
         });
 
