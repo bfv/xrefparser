@@ -4,10 +4,11 @@
   "description": "OpenEdge XREF parser",
   "main": "index.js",
   "scripts": {
+    "build": "npm run compile && npm run test",
+    "compile": "tsc",
     "test": "mocha -r ts-node/register lib/**/*.spec.ts",
-    "compile": "tsc && npm run test",
-    "todist": "cp .npmignore package.json README.md releasenotes.md dist",
-    "publishthis": "npm run compile && npm run todist && npm publish dist"
+    "publishthis": "npm run compile && npm run todist && npm publish dist",
+    "todist": "cp .npmignore package.json README.md releasenotes.md dist"
   },
   "repository": {
     "type": "git",
