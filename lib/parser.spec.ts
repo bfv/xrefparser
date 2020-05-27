@@ -132,7 +132,6 @@ describe('Parser class', () => {
         });
 
         const xreffile2 = getXrefFile('oo/MultipleImplements.cls.xref');
-        fs.writeFileSync('c:/tmp/bla.json', JSON.stringify(xreffile2));
         it('Implement > 1 interface', () => {
 
             let interfacesImplemented = false;
